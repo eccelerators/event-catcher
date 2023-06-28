@@ -1,0 +1,189 @@
+//******************************************************************************
+//
+//                  /------o
+//            eccelerators
+//         o------/
+//
+// This file is an Eccelerators GmbH sample project.
+//
+// MIT License:
+// Copyright (c) 2023 Eccelerators GmbH
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//******************************************************************************
+use Eccelerators.Library.Base.*;
+
+namespace Eccelerators.Library.Base
+{
+
+	block EventCatcherBlk
+	{
+		Name = "Event Catcher Block";
+		Description = "
+			This block defines a basic event catcher e.g. to convert **egde triggered** interrupt sources 
+			to **level triggered** interrupt sources.	   												 			 
+			";
+		Registers = [
+			EventCatcherBlk.EventMaskReg,
+			EventCatcherBlk.EventCaptureReg,
+			EventCatcherBlk.EventOverrunReg
+		];
+		Size = 0x10;
+		register EventMaskReg
+		{
+			Name = "Event Mask Register";
+			Width = 32;
+			Bits = [
+				EventCatcherBlk.EventMaskReg.Mask,
+				Reserved(Width=31)
+			];
+			enum Mask
+			{
+				Width = 1;
+				Values = [
+					EventCatcherBlk.EventMaskReg.Mask.EventEnabled,
+					EventCatcherBlk.EventMaskReg.Mask.EventDisabled
+				];
+				value EventEnabled
+				{
+					Value = 0x1;
+					Description = "Event is catched and forwarded.";
+				}
+			
+				value EventDisabled
+				{
+					Value = 0x0;
+					Description = "Event is ignored.";
+				}
+				Resets = [Rst(Value=0x0)];
+			}		
+		}
+
+		register EventCaptureReg
+		{
+			Name = "Event Capture Register";
+			Width = 32;
+			Bits = [
+				EventCatcherBlk.EventCaptureReg.Capture,
+				Reserved(Width=31)
+			];
+			enum Capture
+			{
+				Behaviour = BitBehaviour.Transparent;
+				Width = 1;
+				Values = [
+					EventCatcherBlk.EventCaptureReg.Capture.Captured,
+					EventCatcherBlk.EventCaptureReg.Capture.NotCaptured,
+					EventCatcherBlk.EventCaptureReg.Capture.Confirmed,
+					EventCatcherBlk.EventCaptureReg.Capture.InEffective
+				];
+				value Captured
+				{
+					Value = 0x1;
+					Behaviour = ValueBehaviour.Read;
+					Description = "An event has been captured and is waiting to be processed.";
+				}
+			
+				value NotCaptured
+				{
+					Value = 0x0;
+					Behaviour = ValueBehaviour.Read;
+					Description = "No event has been captured.";
+				}
+				value Confirmed
+				{
+					Value = 0x1;
+					Behaviour = ValueBehaviour.Write;
+					Name = "Notifies HW that a captured event has been processed by SW.";
+					Description = "
+						SW writes Confirmed to confirm to HW that a captured event has been processed.
+						The value isn't stored, thus there is no need to reset it to '0' again.	
+						Solely the write action is sufficient.	
+						";
+				}
+				value InEffective
+				{
+					Name = "Writing this value has no effect.";
+					Behaviour = ValueBehaviour.Write;
+					Value = 0x0;
+				}
+				Resets = [Rst(Value=0x0)];
+			}	
+		}
+	
+		register EventOverrunReg
+		{
+			Name = "Event Overrun Register";
+			Width = 32;
+			Bits = [
+				EventCatcherBlk.EventOverrunReg.Overrun,
+				Reserved(Width=31)
+			];
+			
+			enum Overrun
+			{
+				Behaviour = BitBehaviour.Transparent;
+				Width = 1;
+				Values = [
+					EventCatcherBlk.EventOverrunReg.Overrun.Happened,
+					EventCatcherBlk.EventOverrunReg.Overrun.NotHappened,
+					EventCatcherBlk.EventOverrunReg.Overrun.Confirmed,
+					EventCatcherBlk.EventOverrunReg.Overrun.InEffective
+				];				
+				value Happened
+				{
+					Value = 0x1;
+					Behaviour = ValueBehaviour.Read;
+					Description = "
+						There has been a new event before a captured event had been processed 
+						thus an overrun has happened and at least one event has been lost.";
+				}
+			
+				value NotHappened
+				{
+					Value = 0x0;
+					Behaviour = ValueBehaviour.Read;
+					Description = "No event has been lost.";
+				}
+		
+				value Confirmed
+				{
+					Value = 0x1;
+					Behaviour = ValueBehaviour.Write;
+					Name = "Notifies HW that a event overrun has been processed by SW.";
+					Description = "
+						SW writes Confirmed to confirm to HW that a event overrun has been processed.
+						The value isn't stored, thus there is no need to reset it to '0' again.	
+						Solely the write action is sufficient.	
+						";
+				}
+				value InEffective
+				{
+					Name = "Writing this value has no effect.";
+					Behaviour = ValueBehaviour.Write;
+					Value = 0x0;
+				}
+				Resets = [Rst(Value=0x0)];
+			}
+		}	
+	}
+
+}
+
+
