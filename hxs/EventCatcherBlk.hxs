@@ -50,8 +50,7 @@ namespace Eccelerators.Library.Base
 			Name = "Event Mask Register";
 			Width = 32;
 			Bits = [
-				EventCatcherBlk.EventMaskReg.Mask,
-				Reserved(Width=31)
+				EventCatcherBlk.EventMaskReg.Mask
 			];
 			enum Mask
 			{
@@ -80,8 +79,7 @@ namespace Eccelerators.Library.Base
 			Name = "Event Capture Register";
 			Width = 32;
 			Bits = [
-				EventCatcherBlk.EventCaptureReg.Capture,
-				Reserved(Width=31)
+				EventCatcherBlk.EventCaptureReg.Capture
 			];
 			enum Capture
 			{
@@ -132,8 +130,7 @@ namespace Eccelerators.Library.Base
 			Name = "Event Overrun Register";
 			Width = 32;
 			Bits = [
-				EventCatcherBlk.EventOverrunReg.Overrun,
-				Reserved(Width=31)
+				EventCatcherBlk.EventOverrunReg.Overrun
 			];
 			
 			enum Overrun
