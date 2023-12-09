@@ -36,7 +36,6 @@ namespace Eccelerators.Library.Base
 		Description = "
 			Interface containing a basic Event Catcher block.
 		";
-		AddressBusWidth = 16;
 		DataBusWidth = 32;
 		Blocks = [EventCatcherBlk];
 	}

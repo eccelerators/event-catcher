@@ -37,27 +37,28 @@ namespace Eccelerators.Library.Base
 		Name = "Event Catcher Block";
 		Description = "
 			This block defines a basic event catcher e.g. to convert **egde triggered** interrupt sources 
-			to **level triggered** interrupt sources.	   												 			 
+			to **level triggered** interrupt sources.
 			";
 		Registers = [
 			EventCatcherBlk.EventMaskReg,
 			EventCatcherBlk.EventCaptureReg,
 			EventCatcherBlk.EventOverrunReg
 		];
-		Size = 0x10;
+
 		register EventMaskReg
 		{
 			Name = "Event Mask Register";
 			Width = 32;
 			Bits = [
-				EventCatcherBlk.EventMaskReg.Mask
+				Mask
 			];
+			
 			enum Mask
 			{
 				Width = 1;
 				Values = [
-					EventCatcherBlk.EventMaskReg.Mask.EventEnabled,
-					EventCatcherBlk.EventMaskReg.Mask.EventDisabled
+					EventEnabled,
+					EventDisabled
 				];
 				value EventEnabled
 				{
@@ -70,7 +71,6 @@ namespace Eccelerators.Library.Base
 					Value = 0x0;
 					Description = "Event is ignored.";
 				}
-				Resets = [Rst(Value=0x0)];
 			}		
 		}
 
@@ -79,17 +79,20 @@ namespace Eccelerators.Library.Base
 			Name = "Event Capture Register";
 			Width = 32;
 			Bits = [
-				EventCatcherBlk.EventCaptureReg.Capture
+				Capture
 			];
+			
+			WriteTransparentPulse = true;
+			
 			enum Capture
 			{
 				Behaviour = BitBehaviour.Transparent;
 				Width = 1;
 				Values = [
-					EventCatcherBlk.EventCaptureReg.Capture.Captured,
-					EventCatcherBlk.EventCaptureReg.Capture.NotCaptured,
-					EventCatcherBlk.EventCaptureReg.Capture.Confirmed,
-					EventCatcherBlk.EventCaptureReg.Capture.InEffective
+					Captured,
+					NotCaptured,
+					Confirmed,
+					InEffective
 				];
 				value Captured
 				{
@@ -121,7 +124,6 @@ namespace Eccelerators.Library.Base
 					Behaviour = ValueBehaviour.Write;
 					Value = 0x0;
 				}
-				Resets = [Rst(Value=0x0)];
 			}	
 		}
 	
@@ -130,18 +132,20 @@ namespace Eccelerators.Library.Base
 			Name = "Event Overrun Register";
 			Width = 32;
 			Bits = [
-				EventCatcherBlk.EventOverrunReg.Overrun
+				Overrun
 			];
+			WriteTransparentPulse = true;
+			
 			
 			enum Overrun
 			{
 				Behaviour = BitBehaviour.Transparent;
 				Width = 1;
 				Values = [
-					EventCatcherBlk.EventOverrunReg.Overrun.Happened,
-					EventCatcherBlk.EventOverrunReg.Overrun.NotHappened,
-					EventCatcherBlk.EventOverrunReg.Overrun.Confirmed,
-					EventCatcherBlk.EventOverrunReg.Overrun.InEffective
+					Happened,
+					NotHappened,
+					Confirmed,
+					InEffective
 				];				
 				value Happened
 				{
@@ -176,7 +180,6 @@ namespace Eccelerators.Library.Base
 					Behaviour = ValueBehaviour.Write;
 					Value = 0x0;
 				}
-				Resets = [Rst(Value=0x0)];
 			}
 		}	
 	}
