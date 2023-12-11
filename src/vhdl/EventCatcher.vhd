@@ -42,11 +42,11 @@ entity EventCatcher is
         Clk : in std_logic;
         Rst : in std_logic;
         EventPuls : in std_logic_vector(BIT_WIDTH - 1 downto 0);
-        EventCaptured : out std_logic_vector(BIT_WIDTH - 1 downto 0);
+        EventCatch : out std_logic_vector(BIT_WIDTH - 1 downto 0);
         Mask : in std_logic_vector(BIT_WIDTH - 1 downto 0);
-        CaptureWritten : in std_logic_vector(BIT_WIDTH - 1 downto 0);
-        WTransPulseEventCaptureReg : in std_logic_vector(BIT_WIDTH - 1 downto 0);
-        CaptureToBeRead : out std_logic_vector(BIT_WIDTH - 1 downto 0);
+        CatchWritten : in std_logic_vector(BIT_WIDTH - 1 downto 0);
+        WTransPulseEventCatchReg : in std_logic_vector(BIT_WIDTH - 1 downto 0);
+        CatchToBeRead : out std_logic_vector(BIT_WIDTH - 1 downto 0);
         OverrunWritten : in std_logic_vector(BIT_WIDTH - 1 downto 0);
         WTransPulseEventOverrunReg : in std_logic_vector(BIT_WIDTH - 1 downto 0);
         OverrunToBeRead : out std_logic_vector(BIT_WIDTH - 1 downto 0)
@@ -55,25 +55,25 @@ end entity;
 
 architecture RTL of EventCatcher is
     
-    signal Capture : std_logic_vector(BIT_WIDTH - 1 downto 0);
+    signal Catch : std_logic_vector(BIT_WIDTH - 1 downto 0);
     signal Overrun : std_logic_vector(BIT_WIDTH - 1 downto 0);
 
 begin
 
-    EventCaptured <= Mask and Capture;
-    CaptureToBeRead <= Capture;
+    EventCatch <= Mask and Catch;
+    CatchToBeRead <= Catch;
     OverrunToBeRead <= Overrun;
     
-    prcCapture : process ( Clk, Rst) is
+    prcCatch : process ( Clk, Rst) is
     begin
         if Rst then
-            Capture <= (others => '0');
+            Catch <= (others => '0');
         elsif rising_edge(Clk) then
             for i in 0 to BIT_WIDTH'high loop
                 if EventPuls(i) then
-                    Capture(i) <= '1';
-                elsif CaptureWritten(i) and WTransPulseEventCaptureReg then
-                    Capture(i) <= '0';
+                    Catch(i) <= '1';
+                elsif CatchWritten(i) and WTransPulseEventCatchReg then
+                    Catch(i) <= '0';
                 end if;
             end loop;
         end if;  
@@ -85,10 +85,11 @@ begin
             Overrun <= (others => '0');
         elsif rising_edge(Clk) then
             for i in 0 to BIT_WIDTH'high loop
-                if Capture(i) and EventPuls(i) then
-                    Overrun  <= '1';
-                elsif OverrunWritten(i) and WTransPulseEventOverrunReg then
+                if OverrunWritten(i) and WTransPulseEventOverrunReg then
                     Overrun(i) <= '0';
+                elsif Catch(i) and EventPuls(i) 
+                   and not (CatchWritten(i) and WTransPulseEventCatchReg) then
+                    Overrun  <= '1';
                 end if;
             end loop;
         end if;  

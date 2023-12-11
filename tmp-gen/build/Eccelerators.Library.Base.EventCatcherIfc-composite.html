@@ -44,7 +44,7 @@
 <td><p>Block Name</p></td>
 </tr>
 <tr class="row-odd"><td><div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">0x0000</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">0x00</span></code></div>
 </div>
 </td>
 <td id="a476c6cfa261"><p>EventCatcherBlk</p></td>
@@ -63,6 +63,10 @@
 <tr class="row-even"><td><p>ID</p></td>
 <td><p>Reset Name</p></td>
 </tr>
+<tr class="row-odd"><td><p>Async</p>
+</td>
+<td id="afef98fdeacb"><p>BusReset: Asynchronous Bus Reset</p></td>
+</tr>
 </tbody>
 </table>
 <div class="line-block">
@@ -78,9 +82,9 @@ to <strong>level triggered</strong> interrupt sources.</p>
 <tr class="row-odd"><td colspan="3"><p>Registers or Delegates of Event Catcher Block</p></td>
 </tr>
 <tr class="row-even"><td colspan="2"><div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">0x0000</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">0x00</span></code></div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">..</span></code></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">0x000f</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">0x0b</span></code></div>
 </div>
 </td>
 <td id="a58e528b2cd3"><p><a class="reference internal" href="#a476c6cfa261">Event Catcher Block</a></p></td>
@@ -90,21 +94,21 @@ to <strong>level triggered</strong> interrupt sources.</p>
 <td><p>Name</p></td>
 </tr>
 <tr class="row-even"><td><div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">0x0000</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">0x00</span></code></div>
 </div>
 </td>
 <td id="a8056963705a"><p>EventMaskReg</p></td>
 <td><p><a class="reference internal" href="#a83801b05b4a">Event Mask Register</a></p></td>
 </tr>
 <tr class="row-odd"><td><div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">0x0004</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">0x04</span></code></div>
 </div>
 </td>
-<td id="adcc94fcc5f6"><p>EventCaptureReg</p></td>
-<td><p><a class="reference internal" href="#a51548a08d2a">Event Capture Register</a></p></td>
+<td id="a9aa51f4ba96"><p>EventCatchReg</p></td>
+<td><p><a class="reference internal" href="#abc462069bec">Event Catch Register</a></p></td>
 </tr>
 <tr class="row-even"><td><div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">0x0008</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">0x08</span></code></div>
 </div>
 </td>
 <td id="ad7c150bf996"><p>EventOverrunReg</p></td>
@@ -120,7 +124,7 @@ to <strong>level triggered</strong> interrupt sources.</p>
 <tr class="row-odd"><td colspan="4"><p>Bits of Event Mask Register</p></td>
 </tr>
 <tr class="row-even"><td colspan="3"><div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">0x0000</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">0x00</span></code></div>
 </div>
 </td>
 <td id="a83801b05b4a"><p><a class="reference internal" href="#a8056963705a">Event Mask Register (EventMaskReg)</a></p></td>
@@ -149,7 +153,7 @@ to <strong>level triggered</strong> interrupt sources.</p>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">0x1</span></code></div>
 </div>
 </td>
-<td id="a0fb41fba44d"><p>EventEnabled</p></td>
+<td id="a470b0f76433"><p>Enabled</p></td>
 <td><p>RW</p></td>
 <td><p>Event is catched and forwarded.</p></td>
 </tr>
@@ -157,7 +161,7 @@ to <strong>level triggered</strong> interrupt sources.</p>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">0x0</span></code></div>
 </div>
 </td>
-<td id="a4a3d605f5fc"><p>EventDisabled</p></td>
+<td id="a1df7a1db00a"><p>Disabled</p></td>
 <td><p>RW</p></td>
 <td><p>Event is ignored.</p></td>
 </tr>
@@ -184,18 +188,18 @@ to <strong>level triggered</strong> interrupt sources.</p>
 </tbody>
 </table>
 </section>
-<section id="event-capture-register-eventcapturereg">
-<h3>Event Capture Register (EventCaptureReg)<a class="headerlink" href="#event-capture-register-eventcapturereg" title="Link to this heading">¶</a></h3>
+<section id="event-catch-register-eventcatchreg">
+<h3>Event Catch Register (EventCatchReg)<a class="headerlink" href="#event-catch-register-eventcatchreg" title="Link to this heading">¶</a></h3>
 <table class="docutils align-default" id="id7">
-<caption><span class="caption-text">Bits of Event Capture Register</span><a class="headerlink" href="#id7" title="Link to this table">¶</a></caption>
+<caption><span class="caption-text">Bits of Event Catch Register</span><a class="headerlink" href="#id7" title="Link to this table">¶</a></caption>
 <tbody>
-<tr class="row-odd"><td colspan="4"><p>Bits of Event Capture Register</p></td>
+<tr class="row-odd"><td colspan="4"><p>Bits of Event Catch Register</p></td>
 </tr>
 <tr class="row-even"><td colspan="3"><div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">0x0004</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">0x04</span></code></div>
 </div>
 </td>
-<td id="a51548a08d2a"><p><a class="reference internal" href="#adcc94fcc5f6">Event Capture Register (EventCaptureReg)</a></p></td>
+<td id="abc462069bec"><p><a class="reference internal" href="#a9aa51f4ba96">Event Catch Register (EventCatchReg)</a></p></td>
 </tr>
 <tr class="row-odd"><td><p>Bits</p></td>
 <td><p>ID</p></td>
@@ -206,11 +210,11 @@ to <strong>level triggered</strong> interrupt sources.</p>
 <div class="line">00</div>
 </div>
 </td>
-<td><p>Capture</p>
+<td><p>Catch</p>
 </td>
-<td id="aced38049aa7"><p>R/W</p></td>
+<td id="a8a92e66c749"><p>R/W</p></td>
 <td><table class="docutils align-default" id="id8">
-<caption><span class="caption-text">Values of Capture</span><a class="headerlink" href="#id8" title="Link to this table">¶</a></caption>
+<caption><span class="caption-text">Values of Catch</span><a class="headerlink" href="#id8" title="Link to this table">¶</a></caption>
 <tbody>
 <tr class="row-odd"><td><p>Value</p></td>
 <td><p>ID</p></td>
@@ -221,26 +225,26 @@ to <strong>level triggered</strong> interrupt sources.</p>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">0x1</span></code></div>
 </div>
 </td>
-<td id="a5d52d046179"><p>Captured</p></td>
+<td id="acc179856ce8"><p>Catched</p></td>
 <td><p>R</p></td>
-<td><p>An event has been captured and is waiting to be processed.</p></td>
+<td><p>An event has been catched and is waiting to be processed.</p></td>
 </tr>
 <tr class="row-odd"><td><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">0x0</span></code></div>
 </div>
 </td>
-<td id="a15d635452a1"><p>NotCaptured</p></td>
+<td id="a452cc0242d5"><p>NotCatched</p></td>
 <td><p>R</p></td>
-<td><p>No event has been captured.</p></td>
+<td><p>No event has been catched.</p></td>
 </tr>
 <tr class="row-even"><td><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">0x1</span></code></div>
 </div>
 </td>
-<td id="a2a4b944775d"><p>Confirmed</p></td>
+<td id="a4ef59a94d7a"><p>Confirmed</p></td>
 <td><p>W</p></td>
-<td><p>Notifies HW that a captured event has been processed by SW.</p>
-<p>SW writes Confirmed to confirm to HW that a captured event has been processed.
+<td><p>Notifies HW that a catched event has been processed by SW.</p>
+<p>SW writes Confirmed to confirm to HW that a catched event has been processed.
 The value isn’t stored, thus there is no need to reset it to ‘0’ again.
 Solely the write action is sufficient.</p>
 </td>
@@ -249,7 +253,7 @@ Solely the write action is sufficient.</p>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">0x0</span></code></div>
 </div>
 </td>
-<td id="a47e3d1c764c"><p>InEffective</p></td>
+<td id="a5dc86e3b76c"><p>InEffective</p></td>
 <td><p>W</p></td>
 <td><p>Writing this value has no effect.</p></td>
 </tr>
@@ -258,6 +262,26 @@ Solely the write action is sufficient.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
+<table class="docutils align-default" id="id9">
+<caption><span class="caption-text">Resets of Catch</span><a class="headerlink" href="#id9" title="Link to this table">¶</a></caption>
+<tbody>
+<tr class="row-odd"><td><p>Init Value</p></td>
+<td><p>ID</p></td>
+<td><p>Impact</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">0b0</span></code></div>
+</div>
+</td>
+<td id="a96aefda956a"><p>Async</p></td>
+<td><p>R</p></td>
+<td><p>BusReset: Asynchronous Bus Reset</p>
+<p>The bit Catch is set to NotCatched after reset in the usually attached EventCatcher HW block.</p>
+</td>
+</tr>
+</tbody>
+</table>
 </td>
 </tr>
 </tbody>
@@ -265,13 +289,13 @@ Solely the write action is sufficient.</p>
 </section>
 <section id="event-overrun-register-eventoverrunreg">
 <h3>Event Overrun Register (EventOverrunReg)<a class="headerlink" href="#event-overrun-register-eventoverrunreg" title="Link to this heading">¶</a></h3>
-<table class="docutils align-default" id="id9">
-<caption><span class="caption-text">Bits of Event Overrun Register</span><a class="headerlink" href="#id9" title="Link to this table">¶</a></caption>
+<table class="docutils align-default" id="id10">
+<caption><span class="caption-text">Bits of Event Overrun Register</span><a class="headerlink" href="#id10" title="Link to this table">¶</a></caption>
 <tbody>
 <tr class="row-odd"><td colspan="4"><p>Bits of Event Overrun Register</p></td>
 </tr>
 <tr class="row-even"><td colspan="3"><div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">0x0008</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">0x08</span></code></div>
 </div>
 </td>
 <td id="a4c9be5b0eaa"><p><a class="reference internal" href="#ad7c150bf996">Event Overrun Register (EventOverrunReg)</a></p></td>
@@ -288,8 +312,8 @@ Solely the write action is sufficient.</p>
 <td><p>Overrun</p>
 </td>
 <td id="afcbfd638728"><p>R/W</p></td>
-<td><table class="docutils align-default" id="id10">
-<caption><span class="caption-text">Values of Overrun</span><a class="headerlink" href="#id10" title="Link to this table">¶</a></caption>
+<td><table class="docutils align-default" id="id11">
+<caption><span class="caption-text">Values of Overrun</span><a class="headerlink" href="#id11" title="Link to this table">¶</a></caption>
 <tbody>
 <tr class="row-odd"><td><p>Value</p></td>
 <td><p>ID</p></td>
@@ -302,7 +326,7 @@ Solely the write action is sufficient.</p>
 </td>
 <td id="a49bd5bb86e0"><p>Happened</p></td>
 <td><p>R</p></td>
-<td><p>There has been a new event before a captured event had been processed
+<td><p>There has been a new event before a catched event had been processed
 thus an overrun has happened and at least one event has been lost.</p></td>
 </tr>
 <tr class="row-odd"><td><div class="line-block">
@@ -338,6 +362,26 @@ Solely the write action is sufficient.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
+<table class="docutils align-default" id="id12">
+<caption><span class="caption-text">Resets of Overrun</span><a class="headerlink" href="#id12" title="Link to this table">¶</a></caption>
+<tbody>
+<tr class="row-odd"><td><p>Init Value</p></td>
+<td><p>ID</p></td>
+<td><p>Impact</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">0b0</span></code></div>
+</div>
+</td>
+<td id="ad7c26dc33bd"><p>Async</p></td>
+<td><p>R</p></td>
+<td><p>BusReset: Asynchronous Bus Reset</p>
+<p>The bit Overrun is set to NotHappened after reset in the usually attached EventCatcher HW block.</p>
+</td>
+</tr>
+</tbody>
+</table>
 </td>
 </tr>
 </tbody>

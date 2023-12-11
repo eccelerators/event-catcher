@@ -41,7 +41,7 @@ namespace Eccelerators.Library.Base
 			";
 		Registers = [
 			EventCatcherBlk.EventMaskReg,
-			EventCatcherBlk.EventCaptureReg,
+			EventCatcherBlk.EventCatchReg,
 			EventCatcherBlk.EventOverrunReg
 		];
 
@@ -57,63 +57,64 @@ namespace Eccelerators.Library.Base
 			{
 				Width = 1;
 				Values = [
-					EventEnabled,
-					EventDisabled
+					Enabled,
+					Disabled
 				];
-				value EventEnabled
+				value Enabled
 				{
 					Value = 0x1;
 					Description = "Event is catched and forwarded.";
 				}
 			
-				value EventDisabled
+				value Disabled
 				{
 					Value = 0x0;
 					Description = "Event is ignored.";
-				}
-			}		
+				}							
+			}	
+			
 		}
 
-		register EventCaptureReg
+		register EventCatchReg
 		{
-			Name = "Event Capture Register";
+			Name = "Event Catch Register";
 			Width = 32;
 			Bits = [
-				Capture
+				Catch
 			];
 			
 			WriteTransparentPulse = true;
 			
-			enum Capture
+			enum Catch
 			{
 				Behaviour = BitBehaviour.Transparent;
 				Width = 1;
 				Values = [
-					Captured,
-					NotCaptured,
+					Catched,
+					NotCatched,
 					Confirmed,
 					InEffective
 				];
-				value Captured
+				value Catched
 				{
 					Value = 0x1;
 					Behaviour = ValueBehaviour.Read;
-					Description = "An event has been captured and is waiting to be processed.";
+					Description = "An event has been catched and is waiting to be processed.";
 				}
 			
-				value NotCaptured
+				value NotCatched
 				{
 					Value = 0x0;
 					Behaviour = ValueBehaviour.Read;
-					Description = "No event has been captured.";
+					Description = "No event has been catched.";
 				}
 				value Confirmed
 				{
 					Value = 0x1;
 					Behaviour = ValueBehaviour.Write;
-					Name = "Notifies HW that a captured event has been processed by SW.";
+					Name = "Notifies HW that a catched event has been processed by SW.";
 					Description = "
-						SW writes Confirmed to confirm to HW that a captured event has been processed.
+						SW writes Confirmed to confirm to HW that a catched event has been processed.
 						The value isn't stored, thus there is no need to reset it to '0' again.	
 						Solely the write action is sufficient.	
 						";
@@ -124,6 +125,13 @@ namespace Eccelerators.Library.Base
 					Behaviour = ValueBehaviour.Write;
 					Value = 0x0;
 				}
+				
+				Resets = {
+				0b0:  BusReset.Async (Behaviour = ResetBehaviour.Read,  
+						Description = "
+							The bit Catch is set to NotCatched after reset in the usually attached EventCatcher HW block.")			
+				};	
+				
 			}	
 		}
 	
@@ -152,7 +160,7 @@ namespace Eccelerators.Library.Base
 					Value = 0x1;
 					Behaviour = ValueBehaviour.Read;
 					Description = "
-						There has been a new event before a captured event had been processed 
+						There has been a new event before a catched event had been processed 
 						thus an overrun has happened and at least one event has been lost.";
 				}
 			
@@ -180,6 +188,13 @@ namespace Eccelerators.Library.Base
 					Behaviour = ValueBehaviour.Write;
 					Value = 0x0;
 				}
+				
+				Resets = {
+				0b0:  BusReset.Async (Behaviour = ResetBehaviour.Read,  
+						Description = "
+							The bit Overrun is set to NotHappened after reset in the usually attached EventCatcher HW block.")			
+				};	
+				
 			}
 		}	
 	}
