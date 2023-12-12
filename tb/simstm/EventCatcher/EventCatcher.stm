@@ -71,6 +71,7 @@ proc
     wait 20
     bus write EventCatcherIfcBus 32 $EventCatchRegAddress 0b1111
     bus write EventCatcherIfcBus 32 $EventOverrunRegAddress 0b1111
+    bus verify EventCatcherIfcBus 32 $EventCatchRegAddress EventCatcherReadVal 0b0000 0b1111
     signal write TestEventCatcherOut 0b0001
     wait 20
     bus verify EventCatcherIfcBus 32 $EventCatchRegAddress EventCatcherReadVal 0b1011 0b1111 
@@ -79,7 +80,43 @@ proc
     signal write TestEventCatcherOut 0b0001
     wait 20    
     bus verify EventCatcherIfcBus 32 $EventCatchRegAddress EventCatcherReadVal 0b1011 0b1111 
-    bus verify EventCatcherIfcBus 32 $EventOverrunRegAddress EventCatcherReadVal 0b0001 0b1111
-        
+    bus verify EventCatcherIfcBus 32 $EventOverrunRegAddress EventCatcherReadVal 0b1011 0b1111
+    bus write EventCatcherIfcBus 32 $EventOverrunRegAddress 0b1111
+    bus verify EventCatcherIfcBus 32 $EventOverrunRegAddress EventCatcherReadVal 0b0000 0b1111
     
+    signal write TestEventCatcherOut 0b0000
+    wait 20
+    bus write EventCatcherIfcBus 32 $EventCatchRegAddress 0b1111
+    bus write EventCatcherIfcBus 32 $EventOverrunRegAddress 0b1111
+    bus verify EventCatcherIfcBus 32 $EventCatchRegAddress EventCatcherReadVal 0b0000 0b1111
+    signal write TestEventCatcherOut 0b1001
+    wait 20
+    bus write EventCatcherIfcBus 32 $EventOverrunRegAddress 0b1000
+    bus verify EventCatcherIfcBus 32 $EventOverrunRegAddress EventCatcherReadVal 0b0000 0b1111
+
+    -- test different event mask cases     
+    signal write TestEventCatcherOut 0b0000
+    wait 20
+    bus write EventCatcherIfcBus 32 $EventMaskRegAddress 0b0000
+    bus write EventCatcherIfcBus 32 $EventCatchRegAddress 0b1111
+    bus write EventCatcherIfcBus 32 $EventOverrunRegAddress 0b1111
+    
+    bus verify EventCatcherIfcBus 32 $EventMaskRegAddress EventCatcherReadVal 0 0b1111 
+    bus verify EventCatcherIfcBus 32 $EventCatchRegAddress EventCatcherReadVal 0 0b1111
+    bus verify EventCatcherIfcBus 32 $EventOverrunRegAddress EventCatcherReadVal 0 0b1111
+    
+    signal write TestEventCatcherOut 0b0101
+    wait 20
+    bus write EventCatcherIfcBus 32 $EventCatchRegAddress 0b0100
+    bus verify EventCatcherIfcBus 32 $EventCatchRegAddress EventCatcherReadVal 0b1111 0b1111
+    bus verify EventCatcherIfcBus 32 $EventMaskRegAddress EventCatcherReadVal 0 0b1111 
+    bus write EventCatcherIfcBus 32 $EventMaskRegAddress 0b0001
+    bus verify EventCatcherIfcBus 32 $EventMaskRegAddress EventCatcherReadVal 0b0001 0b1111
+    bus write EventCatcherIfcBus 32 $EventMaskRegAddress 0b0011
+    bus verify EventCatcherIfcBus 32 $EventMaskRegAddress EventCatcherReadVal 0b0011 0b1111
+    bus write EventCatcherIfcBus 32 $EventMaskRegAddress 0b0111
+    bus verify EventCatcherIfcBus 32 $EventMaskRegAddress EventCatcherReadVal 0b0111 0b1111
+    bus write EventCatcherIfcBus 32 $EventMaskRegAddress 0b1111
+    bus verify EventCatcherIfcBus 32 $EventMaskRegAddress EventCatcherReadVal 0b1111 0b1111
+     
 end proc

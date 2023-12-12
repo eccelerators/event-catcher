@@ -112,6 +112,7 @@ begin
         
             PreviousEventOut0 <= EventOut(0);
             EventPuls0 <= '0'; -- default assignment
+            EventPuls2 <= '0'; -- default assignment
             
             if not PreviousEventOut0 and EventOut(0) then
                 EventPuls0 <= '1'; --generate event at all at rising EventOut0 edge
