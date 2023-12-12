@@ -1,154 +1,140 @@
 [*]
 [*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
-[*] Wed Dec  6 15:55:24 2023
+[*] Mon Dec 11 19:22:19 2023
 [*]
-[dumpfile] "/home/dev/git/eccelerators/spi-controller/ghdl-wishbone_infineon_spi_flash/trace.vcd"
-[dumpfile_mtime] "Wed Dec  6 15:53:40 2023"
-[dumpfile_size] 1018706
-[savefile] "/home/dev/git/eccelerators/spi-controller/ghdl-wishbone_infineon_spi_flash/gtk-waves.gtkw"
-[timestart] 58289600000
-[size] 3333 1784
-[pos] 358 37
-*-26.510778 58915000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[dumpfile] "/home/dev/git/eccelerators/event-catcher/ghdl-wishbone/trace.vcd"
+[dumpfile_mtime] "Mon Dec 11 19:19:13 2023"
+[dumpfile_size] 24003
+[savefile] "/home/dev/git/eccelerators/event-catcher/ghdl-wishbone/gtk-waves.gtkw"
+[timestart] 0
+[size] 2382 1231
+[pos] 74 306
+*-27.455198 437900000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] tb_top_wishbone.
-[treeopen] tb_top_wishbone.i_s25fl129p00.
-[treeopen] tb_top_wishbone.i_spicontroller.
 [sst_width] 233
-[signals_width] 427
+[signals_width] 377
 [sst_expanded] 1
-[sst_vpaned_height] 555
+[sst_vpaned_height] 363
 @28
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.activation
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.autorestart
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.clk
+tb_top_wishbone.clk
 @22
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.cmdendaddresstogoto[8:0]
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.cmdgotoaddresstogoto[8:0]
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.cmdid[3:0]
-@28
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.cpha
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.cpol
-@22
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.fetchedrxbyte[7:0]
-@28
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.fetchedrxbyteispending
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.fetchrxbytepulse
-[color] 2
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.fetchtxbytepulse
-@22
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.forloopcount[7:0]
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.hwbufferaddress[6:0]
-@28
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.hwbufferavailable
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.hwbufferprocessedpulse
-@22
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.hwbufferreaddata[31:0]
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.hwbufferwritedata[31:0]
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.hwbufferwriteenable[3:0]
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.loopcount[7:0]
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.ncs[14:0]
-@28
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.operation[1:0]
-@22
-[color] 3
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.bytecount[8:0]
-[color] 3
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.packetlength[8:0]
+tb_top_wishbone.eventcatch[3:0]
 @23
-[color] 6
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.packetcount[8:0]
-[color] 6
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.packetmultiplier[8:0]
-@22
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.readhwbufferaddresspointer[6:0]
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.readhwbufferrepeataddresspointer[6:0]
+tb_top_wishbone.eventout[3:0]
 @28
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.readytofetchtxbyte
+tb_top_wishbone.eventpuls0
+tb_top_wishbone.eventpuls1
+tb_top_wishbone.eventpuls2
+tb_top_wishbone.eventpuls3
 @22
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.receivebytecount[8:0]
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.receiveframestartaddress[6:0]
-@28
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.rst
+tb_top_wishbone.eventpuls[3:0]
+@420
+tb_top_wishbone.executing_line
 @22
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.rxbyte[7:0]
+tb_top_wishbone.i_eventcatcher.catch[3:0]
+tb_top_wishbone.i_eventcatcher.catchtoberead[3:0]
+tb_top_wishbone.i_eventcatcher.catchwritten[3:0]
 @28
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.rxbyteispending
+tb_top_wishbone.i_eventcatcher.clk
 @22
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.sclkperiodinns[9:0]
+tb_top_wishbone.i_eventcatcher.eventcatch[3:0]
+tb_top_wishbone.i_eventcatcher.eventpuls[3:0]
+tb_top_wishbone.i_eventcatcher.mask[3:0]
+tb_top_wishbone.i_eventcatcher.overrun[3:0]
+tb_top_wishbone.i_eventcatcher.overruntoberead[3:0]
+tb_top_wishbone.i_eventcatcher.overrunwritten[3:0]
 @28
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.selectedbuffernumberownedbysw
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.starttimerpulse
-@24
-[color] 7
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.statenumbered[4:0]
-@28
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.swbufferprepared
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.swbufferspending[1:0]
+tb_top_wishbone.i_eventcatcher.rst
+tb_top_wishbone.i_eventcatcher.wtranspulseeventcatchreg
+tb_top_wishbone.i_eventcatcher.wtranspulseeventoverrunreg
+tb_top_wishbone.i_eventcatcherifcwishbone.blockmatch
+tb_top_wishbone.i_eventcatcherifcwishbone.clk
+tb_top_wishbone.i_eventcatcherifcwishbone.eventcatcherblkack
 @22
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.timercount[20:0]
+tb_top_wishbone.i_eventcatcherifcwishbone.eventcatcherblkdatout[31:0]
 @28
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.timerexpired
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.tranceive
+tb_top_wishbone.i_eventcatcherifcwishbone.eventcatcherblkmatch
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.ack
 @22
-[color] 2
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.txbyte[7:0]
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.waitns[15:0]
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.writehwbufferaddresspointer[6:0]
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.adr[3:0]
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.catchtoberead[3:0]
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.catchwritten[3:0]
 @28
-tb_top_wishbone.i_spicontroller.i_cmdprocessor.wtranspulsecontrolreg
-tb_top_wishbone.i_spicontroller.i_phy.clk
-tb_top_wishbone.i_spicontroller.i_phy.cpha
-tb_top_wishbone.i_spicontroller.i_phy.cpol
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.clk
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.cyc
 @22
-tb_top_wishbone.i_spicontroller.i_phy.fetchedtxbyte[7:0]
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.datin[31:0]
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.datout[31:0]
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.mask[3:0]
 @28
-tb_top_wishbone.i_spicontroller.i_phy.fetchedtxbyteispending
-tb_top_wishbone.i_spicontroller.i_phy.fetchrxbytepulse
-tb_top_wishbone.i_spicontroller.i_phy.fetchtxbytepulse
-tb_top_wishbone.i_spicontroller.i_phy.miso
-tb_top_wishbone.i_spicontroller.i_phy.mosi
-tb_top_wishbone.i_spicontroller.i_phy.readytofetchtxbyte
-tb_top_wishbone.i_spicontroller.i_phy.rst
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.match
 @22
-tb_top_wishbone.i_spicontroller.i_phy.rxbyte[7:0]
-tb_top_wishbone.i_spicontroller.i_phy.rxreg[7:0]
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.overruntoberead[3:0]
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.overrunwritten[3:0]
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.predatout[31:0]
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.predatouteventcatchreg[31:0]
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.predatouteventmaskreg[31:0]
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.predatouteventoverrunreg[31:0]
 @28
-tb_top_wishbone.i_spicontroller.i_phy.sclk
-tb_top_wishbone.i_spicontroller.i_phy.sclkp
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.prematchreadeventcatchreg
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.prematchreadeventmaskreg
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.prematchreadeventoverrunreg
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.prematchwriteeventcatchreg
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.prematchwriteeventmaskreg
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.prematchwriteeventoverrunreg
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.prereadackeventcatchreg
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.prereadackeventmaskreg
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.prereadackeventoverrunreg
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.prewriteackeventcatchreg
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.prewriteackeventmaskreg
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.prewriteackeventoverrunreg
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.readdiffeventcatchreg
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.readdiffeventmaskreg
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.readdiffeventoverrunreg
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.rst
 @22
-tb_top_wishbone.i_spicontroller.i_phy.sclkperiodinns[9:0]
-tb_top_wishbone.i_spicontroller.i_phy.stretchcount16thns[14:0]
-tb_top_wishbone.i_spicontroller.i_phy.tranceivecount[4:0]
-tb_top_wishbone.i_spicontroller.i_phy.txbyte[7:0]
-tb_top_wishbone.i_spicontroller.i_phy.txreg[7:0]
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.sel[3:0]
 @28
-tb_top_wishbone.i_spicontroller.i_phy.clk
-tb_top_wishbone.i_spicontroller.i_phy.cpha
-tb_top_wishbone.i_spicontroller.i_phy.cpol
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.stb
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.we
 @22
-tb_top_wishbone.i_spicontroller.i_phy.fetchedtxbyte[7:0]
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.wregmask[3:0]
 @28
-tb_top_wishbone.i_spicontroller.i_phy.fetchedtxbyteispending
-tb_top_wishbone.i_spicontroller.i_phy.fetchrxbytepulse
-tb_top_wishbone.i_spicontroller.i_phy.fetchtxbytepulse
-tb_top_wishbone.i_spicontroller.i_phy.miso
-tb_top_wishbone.i_spicontroller.i_phy.mosi
-tb_top_wishbone.i_spicontroller.i_phy.readytofetchtxbyte
-tb_top_wishbone.i_spicontroller.i_phy.rst
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.writediffeventcatchreg
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.writediffeventmaskreg
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.writediffeventoverrunreg
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.wtranspulseeventcatchreg
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherblk_eventcatcherifc.wtranspulseeventoverrunreg
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherifcbusmonitor.clk
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherifcbusmonitor.cyc
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherifcbusmonitor.cycdelay
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherifcbusmonitor.match
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherifcbusmonitor.pretimeoutack
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherifcbusmonitor.preunoccupiedack
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherifcbusmonitor.rst
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherifcbusmonitor.timeoutack
 @22
-tb_top_wishbone.i_spicontroller.i_phy.rxbyte[7:0]
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherifcbusmonitor.timeoutcounter[9:0]
 @28
-tb_top_wishbone.i_spicontroller.i_phy.rxbyteispending
+tb_top_wishbone.i_eventcatcherifcwishbone.i_eventcatcherifcbusmonitor.unoccupiedack
+tb_top_wishbone.i_eventcatcherifcwishbone.rst
+tb_top_wishbone.i_eventcatcherifcwishbone.timeoutack
+tb_top_wishbone.i_eventcatcherifcwishbone.unoccupiedack
+tb_top_wishbone.i_tb_simstm.clk
+@420
+tb_top_wishbone.i_tb_simstm.executing_line
 @22
-tb_top_wishbone.i_spicontroller.i_phy.rxreg[7:0]
+tb_top_wishbone.i_tb_simstm.marker[15:0]
 @28
-tb_top_wishbone.i_spicontroller.i_phy.sclk
-tb_top_wishbone.i_spicontroller.i_phy.sclkp
+tb_top_wishbone.i_tb_simstm.rst
+tb_top_wishbone.i_tb_simstm.simdone
 @22
-tb_top_wishbone.i_spicontroller.i_phy.sclkperiodinns[9:0]
-tb_top_wishbone.i_spicontroller.i_phy.stretchcount16thns[14:0]
-tb_top_wishbone.i_spicontroller.i_phy.tranceivecount[4:0]
-tb_top_wishbone.i_spicontroller.i_phy.txbyte[7:0]
-tb_top_wishbone.i_spicontroller.i_phy.txreg[7:0]
+tb_top_wishbone.marker[15:0]
+@28
+tb_top_wishbone.previouseventout0
+tb_top_wishbone.rst
+tb_top_wishbone.simdone
+tb_top_wishbone.timeoutack_detected
+tb_top_wishbone.timeoutack_rec_clear
 [pattern_trace] 1
 [pattern_trace] 0

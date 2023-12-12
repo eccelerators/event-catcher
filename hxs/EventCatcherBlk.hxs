@@ -55,7 +55,7 @@ namespace Eccelerators.Library.Base
 			
 			enum Mask
 			{
-				Width = 1;
+				Width = 4;
 				Values = [
 					Enabled,
 					Disabled
@@ -88,7 +88,7 @@ namespace Eccelerators.Library.Base
 			enum Catch
 			{
 				Behaviour = BitBehaviour.Transparent;
-				Width = 1;
+				Width = 4;
 				Values = [
 					Catched,
 					NotCatched,
@@ -148,7 +148,7 @@ namespace Eccelerators.Library.Base
 			enum Overrun
 			{
 				Behaviour = BitBehaviour.Transparent;
-				Width = 1;
+				Width = 4;
 				Values = [
 					Happened,
 					NotHappened,

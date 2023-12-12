@@ -211,6 +211,8 @@ to <emphasis role="strong">level triggered</emphasis> interrupt sources.</para>
             </row>
             <row>
               <entry>
+                <para>03</para>
+                <para>..</para>
                 <para>00</para>
               </entry>
               <entry>
@@ -354,6 +356,8 @@ to <emphasis role="strong">level triggered</emphasis> interrupt sources.</para>
             </row>
             <row>
               <entry>
+                <para>03</para>
+                <para>..</para>
                 <para>00</para>
               </entry>
               <entry>
@@ -481,7 +485,7 @@ Solely the write action is sufficient.</para>
                       <row>
                         <entry>
                           <para>
-                            <code>0b0</code>
+                            <code>0b0000</code>
                           </para>
                         </entry>
                         <entry xml:id="a96aefda956a">
@@ -547,6 +551,8 @@ Solely the write action is sufficient.</para>
             </row>
             <row>
               <entry>
+                <para>03</para>
+                <para>..</para>
                 <para>00</para>
               </entry>
               <entry>
@@ -675,7 +681,7 @@ Solely the write action is sufficient.</para>
                       <row>
                         <entry>
                           <para>
-                            <code>0b0</code>
+                            <code>0b0000</code>
                           </para>
                         </entry>
                         <entry xml:id="ad7c26dc33bd">

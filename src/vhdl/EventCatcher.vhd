@@ -31,8 +31,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.EventCatcherPackage.all;
-use work.SpiControllerIfcPackage.all;
+use work.EventCatcherIfcPackage.all;
 
 entity EventCatcher is
     generic (
@@ -45,10 +44,10 @@ entity EventCatcher is
         EventCatch : out std_logic_vector(BIT_WIDTH - 1 downto 0);
         Mask : in std_logic_vector(BIT_WIDTH - 1 downto 0);
         CatchWritten : in std_logic_vector(BIT_WIDTH - 1 downto 0);
-        WTransPulseEventCatchReg : in std_logic_vector(BIT_WIDTH - 1 downto 0);
+        WTransPulseEventCatchReg : in std_logic;
         CatchToBeRead : out std_logic_vector(BIT_WIDTH - 1 downto 0);
         OverrunWritten : in std_logic_vector(BIT_WIDTH - 1 downto 0);
-        WTransPulseEventOverrunReg : in std_logic_vector(BIT_WIDTH - 1 downto 0);
+        WTransPulseEventOverrunReg : in std_logic;
         OverrunToBeRead : out std_logic_vector(BIT_WIDTH - 1 downto 0)
     );
 end entity;
@@ -69,7 +68,7 @@ begin
         if Rst then
             Catch <= (others => '0');
         elsif rising_edge(Clk) then
-            for i in 0 to BIT_WIDTH'high loop
+            for i in 0 to BIT_WIDTH - 1 loop
                 if EventPuls(i) then
                     Catch(i) <= '1';
                 elsif CatchWritten(i) and WTransPulseEventCatchReg then
@@ -84,12 +83,12 @@ begin
         if Rst then
             Overrun <= (others => '0');
         elsif rising_edge(Clk) then
-            for i in 0 to BIT_WIDTH'high loop
+            for i in 0 to BIT_WIDTH - 1 loop
                 if OverrunWritten(i) and WTransPulseEventOverrunReg then
                     Overrun(i) <= '0';
                 elsif Catch(i) and EventPuls(i) 
                    and not (CatchWritten(i) and WTransPulseEventCatchReg) then
-                    Overrun  <= '1';
+                    Overrun(i) <= '1';
                 end if;
             end loop;
         end if;  

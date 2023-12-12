@@ -33,6 +33,7 @@ include "Base/Base.stm"
 include "Base/Array.stm"
 include "Base/ReadModifyWrite.stm"
 
+include "EventCatcher/EventCatcher.stm"
 include "Tests/TestEventCatcher.stm"
 
 
@@ -46,33 +47,16 @@ proc
 	bus pointer copy ReadModifyWriteBus32 wishbone
 	bus pointer copy ReadModifyWriteBus16 wishbone
 	bus pointer copy ReadModifyWriteBus8 wishbone
+	bus pointer copy EventCatcherIfcBus wishbone
+	
+	call $EventCatcherIfcInit
 	
 	verbosity $INFO_2
 	trace 0
 	wait 1000
 	log message $INFO "Main test started"
 		
-	equ CmdSetClkPolarityMVal $CmdSetCell_LowMVal
-    call $setCmdSetClkPolarityMVal
-    equ CmdSetClkPhaseMVal $CmdSetCell_FirstMVal
-	
-	equ SPI_FLASH_CLK_PERIOD_NS 20
-	equ SPI_FLASH_CLK_POLARITY $CmdSetCell_HighMVal
-	equ SPI_FLASH_CLK_PHASE $CmdSetCell_SecondMVal
-	loop 5
-		call $testSpiFlash
-		add SPI_FLASH_CLK_PERIOD_NS 20
-	end loop
-	equ SPI_FLASH_CLK_PERIOD_NS 20
-	equ SPI_FLASH_CLK_POLARITY $CmdSetCell_LowMVal
-	equ SPI_FLASH_CLK_PHASE $CmdSetCell_FirstMVal
-	loop 5
-		call $testSpiFlash
-		add SPI_FLASH_CLK_PERIOD_NS 20
-	end loop
-	equ SPI_FLASH_CLK_PERIOD_NS 20
-	equ SPI_FLASH_CLK_POLARITY 0
-	equ SPI_FLASH_CLK_PHASE 0
+    call $TestEventCatcher
 	
 	log message $INFO "Main test finished"
 	wait 1000

@@ -13,7 +13,7 @@ package tb_signals_pkg is
         in_signal_1 : std_logic_vector(7 downto 0);
         in_signal_2 : std_logic;
         in_signal_3 : std_logic;
-        EventCaptured_4 : std_logic_vector(3 downto 0);
+        EventCatch_4 : std_logic_vector(3 downto 0);
     end record;
 
     type t_signals_out is record
@@ -22,7 +22,7 @@ package tb_signals_pkg is
         out_signal_1 : std_logic_vector(7 downto 0);
         out_signal_2 : std_logic;
         out_signal_3 : std_logic;
-        EventPulse_4 : std_logic_vector(3 downto 0);
+        EventOut_4 : std_logic_vector(3 downto 0);
     end record;
 
     -- TODO: Define here the number of interrupts you want to have
@@ -69,7 +69,7 @@ package body tb_signals_pkg is
         signals.in_signal_1 := (others => '0');
         signals.in_signal_2 := '0';
         signals.in_signal_3 := '0';
-        signals.EventCaptured_4 := (others => '0');
+        signals.EventCatch_4 := (others => '0');
         return signals;
     end function;
 
@@ -82,7 +82,7 @@ package body tb_signals_pkg is
         signals.out_signal_1 := (others => '0');
         signals.out_signal_2 := '0';
         signals.out_signal_3 := '0';
-        signals.EventPulse_4 := (others => '0');
+        signals.EventOut_4 := (others => '0');
         return signals;
     end function;
 
@@ -107,7 +107,7 @@ package body tb_signals_pkg is
             when 3 =>
                 temp_var(0) := signals.in_signal_3;
             when 4 =>
-                temp_var(0) := signals.EventCaptured_4;
+                temp_var(signals.EventCatch_4'left downto 0) := signals.EventCatch_4;
             when others =>
                 valid := 0;
         end case;
@@ -136,7 +136,7 @@ package body tb_signals_pkg is
             when 3 =>
                 signals.out_signal_3 <= temp_var(0);
             when 4 =>
-                signals.EventPulse_4 <= temp_var(0);
+                signals.EventOut_4 <= temp_var(signals.EventOut_4'left downto 0);
             when others =>
                 valid := 0;
         end case;

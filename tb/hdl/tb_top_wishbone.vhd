@@ -31,7 +31,7 @@ library ieee;
     use ieee.std_logic_1164.all;
     use ieee.numeric_std.all;
     
-use work.SpiControllerIfcPackage.all;
+use work.EventCatcherIfcPackage.all;
 use work.tb_bus_pkg.all;
 use work.tb_signals_pkg.all;
 use work.tb_base_pkg.all;
@@ -63,26 +63,66 @@ architecture behavioural of tb_top_wishbone is
     signal bus_down : t_bus_down;
     signal bus_up : t_bus_up;    
     
+    signal EventCatcherIfcWishboneDown : T_EventCatcherIfcWishboneDown;
+    signal EventCatcherIfcWishboneUp : T_EventCatcherIfcWishboneUp;    
+    
     signal EventCatcherIfcEventCatcherBlkDown :T_EventCatcherIfcEventCatcherBlkDown;
     signal EventCatcherIfcEventCatcherBlkUp : T_EventCatcherIfcEventCatcherBlkUp;
     signal EventCatcherIfcTrace : T_EventCatcherIfcTrace;
     
+    signal EventOut : std_logic_vector(3 downto 0);
+    signal PreviousEventOut0 : std_logic;
+    signal EventCatch : std_logic_vector(3 downto 0);
     signal EventPuls : std_logic_vector(3 downto 0);
-    signal EventCaptured : std_logic_vector(3 downto 0);
-
+    signal EventPuls0 : std_logic;
+    signal EventPuls1 : std_logic;
+    signal EventPuls2 : std_logic;
+    signal EventPuls3 : std_logic;
     
 begin
 
     Rst <= transport '0' after 100 ns;
     Clk <= transport (not Clk) and (not SimDone)  after 10 ns / 2; -- 100MHz
+    
+    EventOut <= signals_out.EventOut_4;
 
     signals_in.in_signal <= '0';
     signals_in.in_signal_1 <= (others => '0');
     signals_in.in_signal_2 <= '0';
     signals_in.in_signal_3 <= '0';
+    signals_in.EventCatch_4 <= EventCatch;
     
-    signals_in.EventCaptured_4 <= EventCaptured;
-    EventPuls <= signals_out.EventPulse_4;
+    EventPuls <= EventPuls3 & EventPuls2 & EventPuls1 & EventPuls0;
+    
+    EventPuls1 <= EventPuls0 or (EventOut(1) and EventCatcherIfcEventCatcherBlkDown.WTransPulseEventCatchReg); --generate event at same clock as event confirm
+    
+    
+    EventPuls3 <= EventPuls0 or (EventOut(3) and EventCatcherIfcEventCatcherBlkDown.WTransPulseEventOverrunReg); --generate event at same clock as overrun confirm
+    
+    
+    prcGenEventPulses : process ( Clk, Rst) is
+    begin
+        if Rst then
+        
+            EventPuls0 <= '0';
+            EventPuls2 <= '0';
+            PreviousEventOut0 <= '0';
+            
+        elsif rising_edge(Clk) then
+        
+            PreviousEventOut0 <= EventOut(0);
+            EventPuls0 <= '0'; -- default assignment
+            
+            if not PreviousEventOut0 and EventOut(0) then
+                EventPuls0 <= '1'; --generate event at all at rising EventOut0 edge
+            end if;
+            
+            if EventCatcherIfcEventCatcherBlkDown.WTransPulseEventCatchReg and EventOut(2) then
+                EventPuls2 <= '1'; 
+            end if; --generate event one clock after event confirm
+            
+        end if;  
+    end process;
     
     i_tb_simstm : entity work.tb_simstm
         generic map (
@@ -102,7 +142,7 @@ begin
             bus_up => bus_up
         );
         
-    EventCatcherIfcWishboneDown.Adr <= bus_down.wishbone.adr(SpiControllerIfcWishboneDown.Adr'LENGTH - 1 downto 0);
+    EventCatcherIfcWishboneDown.Adr <= bus_down.wishbone.adr(EventCatcherIfcWishboneDown.Adr'LENGTH - 1 downto 0);
     EventCatcherIfcWishboneDown.Sel <= bus_down.wishbone.sel;
     EventCatcherIfcWishboneDown.DatIn <= bus_down.wishbone.data;
     EventCatcherIfcWishboneDown.We <= bus_down.wishbone.we;
@@ -133,11 +173,11 @@ begin
         Clk => Clk,
         Rst => Rst,
         EventPuls => EventPuls,
-        EventCaptured => EventCaptured,
+        EventCatch => EventCatch,
         Mask => EventCatcherIfcEventCatcherBlkDown.Mask,
-        CaptureWritten => EventCatcherIfcEventCatcherBlkDown.CaptureWritten,
-        WTransPulseEventCaptureReg => EventCatcherIfcEventCatcherBlkDown.WTransPulseEventCaptureReg,
-        CaptureToBeRead => EventCatcherIfcEventCatcherBlkUp.CaptureToBeRead,
+        CatchWritten => EventCatcherIfcEventCatcherBlkDown.CatchWritten,
+        WTransPulseEventCatchReg => EventCatcherIfcEventCatcherBlkDown.WTransPulseEventCatchReg,
+        CatchToBeRead => EventCatcherIfcEventCatcherBlkUp.CatchToBeRead,
         OverrunWritten => EventCatcherIfcEventCatcherBlkDown.OverrunWritten,
         WTransPulseEventOverrunReg => EventCatcherIfcEventCatcherBlkDown.WTransPulseEventOverrunReg,
         OverrunToBeRead => EventCatcherIfcEventCatcherBlkUp.OverrunToBeRead
