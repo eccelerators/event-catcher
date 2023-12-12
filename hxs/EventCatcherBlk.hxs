@@ -27,9 +27,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //******************************************************************************
-use Eccelerators.Library.Base.*;
+use Eccelerators.Library.IP.*;
 
-namespace Eccelerators.Library.Base
+namespace Eccelerators.Library.IP
 {
 
 	block EventCatcherBlk
@@ -37,80 +37,96 @@ namespace Eccelerators.Library.Base
 		Name = "Event Catcher Block";
 		Description = "
 			This block defines a basic event catcher e.g. to convert **egde triggered** interrupt sources 
-			to **level triggered** interrupt sources.	   												 			 
-			";
+            to **level triggered** interrupt sources.	
+            Its purpose is to be inherited by implementations of e.g., GPIO or Timer controllers 
+            utilizing this function to provide event information to SW for polling or as a prestage to 
+            transport events to an interrupt controller. Usually the events can be activated or deactivated at the HW block
+            sourcing them e.g. timer is activated or not. 
+            The events must be deliverered as a pulse of exactly one clock duration. 
+            
+            Event Catcher details:
+			 
+			.. figure:: resources/EventCatcherUserLogic.png
+			   :scale: 50
+			   
+			   Event Catcher details		 	 
+		";
 		Registers = [
 			EventCatcherBlk.EventMaskReg,
-			EventCatcherBlk.EventCaptureReg,
+			EventCatcherBlk.EventCatchReg,
 			EventCatcherBlk.EventOverrunReg
 		];
-		Size = 0x10;
+
 		register EventMaskReg
 		{
 			Name = "Event Mask Register";
 			Width = 32;
 			Bits = [
-				EventCatcherBlk.EventMaskReg.Mask
+				Mask
 			];
+			
 			enum Mask
 			{
-				Width = 1;
+				Width = 4;
 				Values = [
-					EventCatcherBlk.EventMaskReg.Mask.EventEnabled,
-					EventCatcherBlk.EventMaskReg.Mask.EventDisabled
+					Enabled,
+					Disabled
 				];
-				value EventEnabled
+				value Enabled
 				{
 					Value = 0x1;
 					Description = "Event is catched and forwarded.";
 				}
 			
-				value EventDisabled
+				value Disabled
 				{
 					Value = 0x0;
 					Description = "Event is ignored.";
-				}
-				Resets = [Rst(Value=0x0)];
-			}		
+				}							
+			}	
+			
 		}
 
-		register EventCaptureReg
+		register EventCatchReg
 		{
-			Name = "Event Capture Register";
+			Name = "Event Catch Register";
 			Width = 32;
 			Bits = [
-				EventCatcherBlk.EventCaptureReg.Capture
+				Catch
 			];
-			enum Capture
+			
+			WriteTransparentPulse = true;
+			
+			enum Catch
 			{
 				Behaviour = BitBehaviour.Transparent;
-				Width = 1;
+				Width = 4;
 				Values = [
-					EventCatcherBlk.EventCaptureReg.Capture.Captured,
-					EventCatcherBlk.EventCaptureReg.Capture.NotCaptured,
-					EventCatcherBlk.EventCaptureReg.Capture.Confirmed,
-					EventCatcherBlk.EventCaptureReg.Capture.InEffective
+					Catched,
+					NotCatched,
+					Confirmed,
+					InEffective
 				];
-				value Captured
+				value Catched
 				{
 					Value = 0x1;
 					Behaviour = ValueBehaviour.Read;
-					Description = "An event has been captured and is waiting to be processed.";
+					Description = "An event has been catched and is waiting to be processed.";
 				}
 			
-				value NotCaptured
+				value NotCatched
 				{
 					Value = 0x0;
 					Behaviour = ValueBehaviour.Read;
-					Description = "No event has been captured.";
+					Description = "No event has been catched.";
 				}
 				value Confirmed
 				{
 					Value = 0x1;
 					Behaviour = ValueBehaviour.Write;
-					Name = "Notifies HW that a captured event has been processed by SW.";
+					Name = "Notifies HW that a catched event has been processed by SW.";
 					Description = "
-						SW writes Confirmed to confirm to HW that a captured event has been processed.
+						SW writes Confirmed to confirm to HW that a catched event has been processed.
 						The value isn't stored, thus there is no need to reset it to '0' again.	
 						Solely the write action is sufficient.	
 						";
@@ -121,7 +137,13 @@ namespace Eccelerators.Library.Base
 					Behaviour = ValueBehaviour.Write;
 					Value = 0x0;
 				}
-				Resets = [Rst(Value=0x0)];
+				
+				Resets = {
+				0b0:  BusReset.Async (Behaviour = ResetBehaviour.Read,  
+						Description = "
+							The bit Catch is set to NotCatched after reset in the usually attached EventCatcher HW block.")			
+				};	
+				
 			}	
 		}
 	
@@ -130,25 +152,27 @@ namespace Eccelerators.Library.Base
 			Name = "Event Overrun Register";
 			Width = 32;
 			Bits = [
-				EventCatcherBlk.EventOverrunReg.Overrun
+				Overrun
 			];
+			WriteTransparentPulse = true;
+			
 			
 			enum Overrun
 			{
 				Behaviour = BitBehaviour.Transparent;
-				Width = 1;
+				Width = 4;
 				Values = [
-					EventCatcherBlk.EventOverrunReg.Overrun.Happened,
-					EventCatcherBlk.EventOverrunReg.Overrun.NotHappened,
-					EventCatcherBlk.EventOverrunReg.Overrun.Confirmed,
-					EventCatcherBlk.EventOverrunReg.Overrun.InEffective
+					Happened,
+					NotHappened,
+					Confirmed,
+					InEffective
 				];				
 				value Happened
 				{
 					Value = 0x1;
 					Behaviour = ValueBehaviour.Read;
 					Description = "
-						There has been a new event before a captured event had been processed 
+						There has been a new event before a catched event had been processed 
 						thus an overrun has happened and at least one event has been lost.";
 				}
 			
@@ -176,7 +200,13 @@ namespace Eccelerators.Library.Base
 					Behaviour = ValueBehaviour.Write;
 					Value = 0x0;
 				}
-				Resets = [Rst(Value=0x0)];
+				
+				Resets = {
+				0b0:  BusReset.Async (Behaviour = ResetBehaviour.Read,  
+						Description = "
+							The bit Overrun is set to NotHappened after reset in the usually attached EventCatcher HW block.")			
+				};	
+				
 			}
 		}	
 	}
