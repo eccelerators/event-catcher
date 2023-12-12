@@ -37,8 +37,17 @@ namespace Eccelerators.Library.Base
 		Name = "Event Catcher Block";
 		Description = "
 			This block defines a basic event catcher e.g. to convert **egde triggered** interrupt sources 
-			to **level triggered** interrupt sources.
-			";
+            to **level triggered** interrupt sources.	
+            Its purpose is to be inherited by implementations of e.g., GPIO, Timer or Interrupt controllers 
+            utilizing this function.
+            
+            SW-operation flow:
+			 
+			.. figure:: resources/SwFlow.png
+			   :scale: 9
+			   
+			   SW-operation flow		 	 
+		";
 		Registers = [
 			EventCatcherBlk.EventMaskReg,
 			EventCatcherBlk.EventCatchReg,
