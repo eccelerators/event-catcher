@@ -1,15 +1,15 @@
-[submodule "hxs/bases/usual-objects"]
+[submodule "submodules/usual-objects"]
 	path = submodules/usual-objects
 	url = git@github.com:eccelerators/usual-objects.git
-[submodule "sphinx-template"]
+[submodule "submodules/sphinx-template"]
 	path = submodules/sphinx-template
 	url = git@github.com:eccelerators/sphinx-template.git
-[submodule "eccelerators-docbook"]
+[submodule "submodules/eccelerators-docbook"]
 	path = submodules/eccelerators-docbook
 	url = git@github.com:eccelerators/eccelerators-docbook.git
-[submodule "sphinx_docbook"]
+[submodule "submodules/sphinx_docbook"]
 	path = submodules/sphinx_docbook
 	url = git@github.com:eccelerators/sphinx_docbook.git
-[submodule "tb-ip/hdl/Eccelerators/simstm"]
+[submodule "submodules/simstm"]
 	path = submodules/simstm
 	url = git@github.com:eccelerators/simstm.git
