@@ -1,0 +1,164 @@
+<?xml version="1.0" ?>
+<project name="EventCatcherModelSim-wishbone">
+   <property environment="env"/>
+   <property name="MODELSIM_BIN_DIR" value="/opt/intelFPGA/20.1/modelsim_ase/bin"/>
+   <property name="ROOT_DIR" value="./../"/>
+   <property name="MODELSIM_RUN_DIR" value="${ROOT_DIR}/modelsim-wishbone"/>
+   <property name="MODELSIM_LIBRARIES_DIR" value="${MODELSIM_RUN_DIR}/libraries"/>
+   <property name="TOP_LEVEL_NAME" value="work.tb_top_wishbone"/>
+   
+   <target name="make-lib" description="make work lib">
+      <mkdir dir="${MODELSIM_LIBRARIES_DIR}"/>
+      <exec executable="${MODELSIM_BIN_DIR}/vlib" failonerror="true">
+         <arg value="${MODELSIM_LIBRARIES_DIR}/work"/>
+      </exec>
+      <exec executable="${MODELSIM_BIN_DIR}/vmap" failonerror="true">
+         <arg value="work"/>
+         <arg value="${MODELSIM_LIBRARIES_DIR}/work"/>
+      </exec>
+      <exec executable="${MODELSIM_BIN_DIR}/vmap" failonerror="true">
+         <arg value="work_lib"/>
+         <arg value="${MODELSIM_LIBRARIES_DIR}/work"/>
+      </exec>
+   </target>
+   
+   <target name="clean-lib" description="clean libs">
+      <delete>
+         <fileset dir="${MODELSIM_LIBRARIES_DIR}/work">
+            <include name="**/*"/>
+         </fileset>
+      </delete>
+   </target>
+   
+   	<target name="all" depends="
+		clean-lib,
+		make-lib,
+		compile,
+		elaborate
+		" description="compile all" />
+  
+   
+   <target name="compile" depends="
+     -do_compile_tb_base_pkg.vhd,
+     -do_compile_tb_base_pkg_body.vhd,
+     -do_compile_tb_instructions_pkg.vhd,
+     -do_compile_tb_interpreter_pkg.vhd,
+     -do_compile_tb_interpreter_pkg_body.vhd,
+     -do_compile_tb_bus_wishbone_pkg.vhd,
+     -do_compile_tb_bus_avalon_pkg.vhd,
+     -do_compile_tb_bus_axi4lite_pkg.vhd, 
+     -do_compile_tb_bus_pkg.vhd,
+     -do_compile_tb_signals_pkg.vhd,
+     -do_compile_tb_simstm.vhd,
+     -do_compile_EventCatcherIfcPackage.vhd,
+     -do_compile_EventCatcherIfcWishbone.vhd,
+     -do_compile_EventCatcher.vhd,
+     -do_compile_tb_top_wishbone.vhd"
+         description="CompileAll"/>
+         
+   <target name="elaborate" description="ElabLinux">
+      <exec executable="${MODELSIM_BIN_DIR}/vsim">
+         <arg value="-t"/>
+         <arg value="ps"/>
+         <arg value="-L"/>
+         <arg value="work"/>
+         <arg value="${TOP_LEVEL_NAME}"/>
+         <arg value="-i"/>
+      </exec>
+   </target>
+   
+
+   <target name="-do_compile_tb_base_pkg.vhd" description="compile tb_pkg.vhd">
+      <exec executable="${MODELSIM_BIN_DIR}/vcom" failonerror="true">
+         <arg value="-2008"/>
+         <arg value="./../../submodules/simstm/src/tb_base_pkg.vhd"/>
+      </exec>
+   </target>
+   <target name="-do_compile_tb_base_pkg_body.vhd" description="compile tb_pkg.vhd">
+      <exec executable="${MODELSIM_BIN_DIR}/vcom" failonerror="true">
+         <arg value="-2008"/>
+         <arg value="./../../submodules/simstm/src/tb_base_pkg_body.vhd"/>
+      </exec>
+   </target>
+   <target name="-do_compile_tb_instructions_pkg.vhd" description="compile tb_pkg.vhd">
+      <exec executable="${MODELSIM_BIN_DIR}/vcom" failonerror="true">
+         <arg value="-2008"/>
+         <arg value="./../../submodules/simstm/src/tb_instructions_pkg.vhd"/>
+      </exec>
+   </target>
+   <target name="-do_compile_tb_interpreter_pkg.vhd" description="compile tb_pkg.vhd">
+      <exec executable="${MODELSIM_BIN_DIR}/vcom" failonerror="true">
+         <arg value="-2008"/>
+         <arg value="./../../submodules/simstm/src/tb_interpreter_pkg.vhd"/>
+      </exec>
+   </target>
+   <target name="-do_compile_tb_interpreter_pkg_body.vhd" description="compile tb_pkg.vhd">
+      <exec executable="${MODELSIM_BIN_DIR}/vcom" failonerror="true">
+         <arg value="-2008"/>
+         <arg value="./../../submodules/simstm/src/tb_interpreter_pkg_body.vhd"/>
+      </exec>
+   </target>
+   <target name="-do_compile_tb_bus_wishbone_pkg.vhd" description="compile tb_pkg_bus_wishbone.vhd">
+      <exec executable="${MODELSIM_BIN_DIR}/vcom" failonerror="true">
+         <arg value="-2008"/>
+         <arg value="./../../submodules/simstm/src/tb_bus_wishbone_pkg.vhd"/>
+      </exec>
+   </target>
+   <target name="-do_compile_tb_bus_avalon_pkg.vhd" description="compile tb_pkg_bus_avalonmm.vhd">
+      <exec executable="${MODELSIM_BIN_DIR}/vcom" failonerror="true">
+         <arg value="-2008"/>
+         <arg value="./../../submodules/simstm/src/tb_bus_avalon_pkg.vhd"/>
+      </exec>
+   </target>
+   <target name="-do_compile_tb_bus_axi4lite_pkg.vhd" description="compile tb_tb_pkg_bus_axi4lite.vhd">
+      <exec executable="${MODELSIM_BIN_DIR}/vcom" failonerror="true">
+         <arg value="-2008"/>
+         <arg value="./../../submodules/simstm/src/tb_bus_axi4lite_pkg.vhd"/>
+      </exec>
+   </target>
+   <target name="-do_compile_tb_bus_pkg.vhd" description="compile tb_pkg_bus.vhd">
+      <exec executable="${MODELSIM_BIN_DIR}/vcom" failonerror="true">
+         <arg value="-2008"/>
+         <arg value="./../../submodules/simstm/src_to_customize/tb_bus_pkg.vhd"/>
+      </exec>
+   </target>
+   <target name="-do_compile_tb_signals_pkg.vhd" description="compile tb_pkg_signals.vhd">
+      <exec executable="${MODELSIM_BIN_DIR}/vcom" failonerror="true">
+         <arg value="-2008"/>
+         <arg value="./../../tb/hdl/tb_signals_pkg.vhd"/>
+      </exec>
+   </target>
+   <target name="-do_compile_tb_simstm.vhd" description="compile tb_simstm.vhd">
+      <exec executable="${MODELSIM_BIN_DIR}/vcom" failonerror="true">
+         <arg value="-2008"/>
+         <arg value="./../../submodules/simstm/src/tb_simstm.vhd"/>
+      </exec>
+   </target>
+   <target name="-do_compile_EventCatcherIfcWishbone.vhd" description="compile EventCatcherIfcWishbone.vhd">
+      <exec executable="${MODELSIM_BIN_DIR}/vcom" failonerror="true">
+         <arg value="-2008"/>
+         <arg value="./../../src-gen/vhdl/wishbone/EventCatcherIfcWishbone.vhd"/>
+      </exec>
+   </target>
+   <target name="-do_compile_EventCatcherIfcPackage.vhd" description="compile EventCatcherIfcPackage.vhd">
+      <exec executable="${MODELSIM_BIN_DIR}/vcom" failonerror="true">
+         <arg value="-2008"/>
+         <arg value="./../../src-gen/vhdl/wishbone/EventCatcherIfcPackage.vhd"/>
+      </exec>
+   </target>
+
+   <target name="-do_compile_EventCatcher.vhd" description="compile EventCatcher.vhd">
+      <exec executable="${MODELSIM_BIN_DIR}/vcom" failonerror="true">
+         <arg value="-2008"/>
+         <arg value="./../../src/vhdl/EventCatcher.vhd"/>
+      </exec>
+   </target>
+ 
+   <target name="-do_compile_tb_top_wishbone.vhd" description="compile tb_top_wishbone.vhd">
+      <exec executable="${MODELSIM_BIN_DIR}/vcom" failonerror="true">
+         <arg value="-2008"/>
+         <arg value="./../../tb/hdl/tb_top_wishbone.vhd"/>
+      </exec>
+   </target>
+   
+</project>

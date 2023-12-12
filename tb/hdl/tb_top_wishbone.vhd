@@ -39,7 +39,7 @@ use work.tb_base_pkg.all;
 
 entity tb_top_wishbone is
     generic (
-        stimulus_path : string := "../tb/simstm/";
+        stimulus_path : string := "../../tb/simstm/";
         stimulus_file : string := "TestMainWishbone.stm"
     );
 end;

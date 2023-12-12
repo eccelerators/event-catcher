@@ -27,7 +27,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //******************************************************************************
-namespace Eccelerators.Library.Base
+namespace Eccelerators.Library.IP
 {
 	@Generator('docs.file_type', 'ReStructured Text')
     interface EventCatcherIfc

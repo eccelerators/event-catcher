@@ -9,7 +9,7 @@
 	<property environment="env" />
 	<property name="HXS_FILES"
 		value="
-		hxs/bases/usual-objects/hxs/UsualObjects.hxs
+		submodules/usual-objects/hxs/UsualObjects.hxs
 		hxs/EventCatcherBlk.hxs 
 		hxs/${ant.project.name}.hxs	
 		" 		
@@ -22,7 +22,7 @@
 	
 	
 	<basename property="eccelerators-book.basename" file="${basedir}" />
-	<property name="gen.filename.stem" value="eccelerators.library.ip.SpiControllerIfc"/>
+	<property name="gen.filename.stem" value="eccelerators.library.ip.EventCatcherIfc"/>
 	<property name="fo-gen.pdf.filename" value="${gen.filename.stem}.pdf" />
 
 	<property name="sphinx.rst.folderpath" value="${basedir}/src/docs"/>
@@ -34,28 +34,28 @@
 
 	
 	<!-- Properties -->
-	<property name="dir.classpath.xslt" value="${basedir}/eccelerators-docbook/customization/resources/xslt-classpath" />
-	<property name="dir.docbook.xml" value="${basedir}/eccelerators-docbook/source/${docbook.xml.language}" />
-	<property name="dir.docbook.xsl" value="${basedir}/eccelerators-docbook/customization/resources/docbook-xsl-ns" />
-	<property name="dir.target" value="${basedir}/eccelerators-docbook/target/${docbook.xml.language}" />
+	<property name="dir.classpath.xslt" value="${basedir}/submodules/eccelerators-docbook/customization/resources/xslt-classpath" />
+	<property name="dir.docbook.xml" value="${basedir}/submodules/eccelerators-docbook/source/${docbook.xml.language}" />
+	<property name="dir.docbook.xsl" value="${basedir}/submodules/eccelerators-docbook/customization/resources/docbook-xsl-ns" />
+	<property name="dir.target" value="${basedir}/submodules/eccelerators-docbook/target/${docbook.xml.language}" />
 
 	<property name="docbook.xml.file" value="${docbook.xml.filename}.xml" />
 
 	<property name="docbook.xsl.catalog" value="${dir.docbook.xsl}/catalog.xml" />
 
 	<property name="docbook.xsl.html5" value="${dir.docbook.xsl}/xhtml5/onechunk.xsl" />
-	<property name="dir.assets.html5" value="${basedir}/eccelerators-docbook/customization/resources/assets" />
+	<property name="dir.assets.html5" value="${basedir}/submodules/eccelerators-docbook/customization/resources/assets" />
 
 
 	<property name="eccelerators-book.xsl.html5" value="${dir.docbook.xsl}/customization/eccelerators-book/eccelerators-book-html.xsl" />
 	<property name="docbook.xsl.html5" value="${dir.docbook.xsl}/xhtml5/onechunk.xsl" />
-	<property name="dir.assets.html5" value="${basedir}/customization/resources/assets" />
+	<property name="dir.assets.html5" value="${basedir}/submodules/customization/resources/assets" />
 
 	<property name="eccelerators-book.xsl.xsl-fo" value="${dir.docbook.xsl}/customization/eccelerators-book/eccelerators-book-fo.xsl" />
 	<property name="docbook.xsl.xsl-fo" value="${dir.docbook.xsl}/fo/docbook.xsl" />
-	<property name="dir.assets.xsl-fo" value="${basedir}/eccelerators-docbook/customization/resources/assets" />
+	<property name="dir.assets.xsl-fo" value="${basedir}/submodules/eccelerators-docbook/customization/resources/assets" />
 
-	<property name="fop.user.configuration.file" value="${basedir}/eccelerators-docbook/customization/resources/fop-user-configuration.xml" />
+	<property name="fop.user.configuration.file" value="${basedir}/submodules/eccelerators-docbook/customization/resources/fop-user-configuration.xml" />
 
 	<!-- Classpath -->
 	<path id="classpath.xslt">
@@ -91,6 +91,7 @@
 	<target name="-clean-docbook" description="Delete the target directory and copied sources">
 		<delete dir="${basedir}/eccelerators-docbook/target" />
 		<delete dir="${dir.docbook.xml}/resources" />
+		<delete dir="sphinx_docbook" failonerror="false"/>
 	</target>
 	
 	<target name="-XSL-FO" description="Generate a -XSL-FO file">
@@ -209,7 +210,7 @@
 			</fileset>
 		</delete>
 		<copy todir="tmp-gen/source">
-			<fileset dir="sphinx-template/source">
+			<fileset dir="submodules/sphinx-template/source">
 				<include name="**/*" />
 			</fileset>
 		</copy>
@@ -249,7 +250,14 @@
 	
 	<target name="rst2docbook" depends="-collect-sources-for-sphinx-transformation" description="Build docbook description from rst with Sphinx">
 		<delete dir="src-gen/docbook" failonerror="false"/>
+		<copy todir="sphinx_docbook">
+			<fileset dir="submodules/sphinx_docbook">
+				<include name="**/*" />
+				<exclude name=".git"/>
+			</fileset>
+		</copy>			
 	    <run_sphinx-docbook />  
+	    <delete dir="sphinx_docbook" failonerror="false"/>
 		<copy todir="src-gen/docbook">
 			<fileset dir="src/docbook">
 				<include name="**/*" />
@@ -282,33 +290,33 @@
 		</copy>		
 	</target>
 	
-	<target name="-collect-sources-for-docbook-transformation" description="Collect all sources and resources for docbook project in eccelerators-docbook/source/en folder">
-		<copy todir="eccelerators-docbook/source/en">
+	<target name="-collect-sources-for-docbook-transformation" description="Collect all sources and resources for docbook project in submodules/eccelerators-docbook/source/en folder">
+		<copy todir="submodules/eccelerators-docbook/source/en">
 			<fileset dir="src/docbook">
 				<include name="**/*.xml" />
 			</fileset>
 		</copy>
-		<copy todir="eccelerators-docbook/source/en/resources" failonerror="false">
+		<copy todir="submodules/eccelerators-docbook/source/en/resources" failonerror="false">
 			<fileset dir="src/docbook/resources">
 				<include name="**/*" />
 			</fileset>
 		</copy>
-		<copy todir="eccelerators-docbook/source/en">
+		<copy todir="submodules/eccelerators-docbook/source/en">
 			<fileset dir="src-gen/docbook">
 				<include name="**/*.xml" />
 			</fileset>
 		</copy>
-		<copy todir="eccelerators-docbook/source/en/resources" failonerror="false">
+		<copy todir="submodules/eccelerators-docbook/source/en/resources" failonerror="false">
 			<fileset dir="src/rst/resources">
 				<include name="**/*.png" />
 			</fileset>
 		</copy>
-		<copy todir="eccelerators-docbook/source/en/resources" failonerror="false">
+		<copy todir="submodules/eccelerators-docbook/source/en/resources" failonerror="false">
 			<fileset dir="hxs/resources">
 				<include name="**/*.png" />
 			</fileset>
 		</copy>
-		<copy todir="eccelerators-docbook/source/en/resources">
+		<copy todir="submodules/eccelerators-docbook/source/en/resources">
 			<fileset dir="src-gen/c">
 				<include name="**/*.h" />
 			</fileset>
@@ -316,27 +324,27 @@
 	</target>
 	
 	<target name="-collect-sources-for-docbook-pdf-transformation" description="Collect all sources and resources for docbook project in eccelerators-docbook/source/en folder">
-		<copy todir="eccelerators-docbook/source/en">
+		<copy todir="submodules/eccelerators-docbook/source/en">
 			<fileset dir="src/docbook">
 				<include name="**/*.xml" />
 			</fileset>
 		</copy>
-		<copy todir="eccelerators-docbook/source/en/resources" failonerror="false">
+		<copy todir="submodules/eccelerators-docbook/source/en/resources" failonerror="false">
 			<fileset dir="src/docbook/resources">
 				<include name="**/*" />
 			</fileset>
 		</copy>
-		<copy todir="eccelerators-docbook/source/en">
+		<copy todir="submodules/eccelerators-docbook/source/en">
 			<fileset dir="src-gen/docbook">
 				<include name="**/*.xml" />
 			</fileset>
 		</copy>
-		<copy todir="eccelerators-docbook/source/en/resources" failonerror="false">
+		<copy todir="submodules/eccelerators-docbook/source/en/resources" failonerror="false">
 			<fileset dir="src/rst/resources">
 				<include name="**/*.png" />
 			</fileset>
 		</copy>
-		<copy todir="eccelerators-docbook/source/en/resources" failonerror="false">
+		<copy todir="submodules/eccelerators-docbook/source/en/resources" failonerror="false">
 			<fileset dir="hxs/resources">
 				<include name="**/*.png" />
 			</fileset>

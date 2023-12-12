@@ -5,7 +5,7 @@ Welcome to EventCatcher's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   Eccelerators.Library.Base.EventCatcherIfc-composite
+   Eccelerators.Library.IP.EventCatcherIfc-composite
 
 
 Indices and tables

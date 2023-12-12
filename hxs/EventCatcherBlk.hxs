@@ -27,9 +27,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //******************************************************************************
-use Eccelerators.Library.Base.*;
+use Eccelerators.Library.IP.*;
 
-namespace Eccelerators.Library.Base
+namespace Eccelerators.Library.IP
 {
 
 	block EventCatcherBlk
@@ -41,12 +41,12 @@ namespace Eccelerators.Library.Base
             Its purpose is to be inherited by implementations of e.g., GPIO, Timer or Interrupt controllers 
             utilizing this function.
             
-            SW-operation flow:
+            Event Catcher details:
 			 
-			.. figure:: resources/SwFlow.png
+			.. figure:: resources/EventCatcherUserLogic.png
 			   :scale: 9
 			   
-			   SW-operation flow		 	 
+			   Event Catcher details		 	 
 		";
 		Registers = [
 			EventCatcherBlk.EventMaskReg,
