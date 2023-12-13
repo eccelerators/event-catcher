@@ -52,9 +52,9 @@ namespace Eccelerators.Library.IP
 			   Event Catcher details		 	 
 		";
 		Registers = [
-			EventCatcherBlk.EventMaskReg,
-			EventCatcherBlk.EventCatchReg,
-			EventCatcherBlk.EventOverrunReg
+			EventMaskReg,
+			EventCatchReg,
+			EventOverrunReg
 		];
 
 		register EventMaskReg
@@ -69,16 +69,16 @@ namespace Eccelerators.Library.IP
 			{
 				Width = 4;
 				Values = [
-					Enabled,
-					Disabled
+					EventEnabled,
+					EventDisabled
 				];
-				value Enabled
+				value EventEnabled
 				{
 					Value = 0x1;
 					Description = "Event is catched and forwarded.";
 				}
 			
-				value Disabled
+				value EventDisabled
 				{
 					Value = 0x0;
 					Description = "Event is ignored.";
