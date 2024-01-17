@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ipxact:component xmlns:ipxact="http://www.accellera.org/XMLSchema/IPXACT/1685-2014" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.accellera.org/XMLSchema/IPXACT/1685-2014 http://www.accellera.org/XMLSchema/IPXACT/1685-2014/index.xsd">
+    <ipxact:vendor>eccelerators.com</ipxact:vendor>
+    <ipxact:library>interface</ipxact:library>
+    <ipxact:name>EventCatcherIfc</ipxact:name>
+    <ipxact:version>0.0.1</ipxact:version>
+    <ipxact:memoryMaps>
+        <ipxact:memoryMap>
+            <ipxact:name>EventCatcherBlk</ipxact:name>
+            <ipxact:displayName>Event Catcher Block</ipxact:displayName>
+            <ipxact:description>
+			This block defines a basic event catcher e.g. to convert **egde triggered** interrupt sources 
+            to **level triggered** interrupt sources.	
+            Its purpose is to be inherited by implementations of e.g., GPIO or Timer controllers 
+            utilizing this function to provide event information to SW for polling or as a prestage to 
+            transport events to an interrupt controller. Usually the events can be activated or deactivated at the HW block
+            sourcing them e.g. timer is activated or not. 
+            The events must be deliverered as a pulse of exactly one clock duration. 
+            
+            Event Catcher details:
+			 
+			.. figure:: resources/EventCatcherUserLogic.png
+			   :scale: 50
+			   
+			   Event Catcher details		 	 
+		</ipxact:description>
+            <ipxact:addressBlock>
+                <ipxact:name>EventMaskReg</ipxact:name>
+                <ipxact:displayName>Event Mask Register</ipxact:displayName>
+                <ipxact:description></ipxact:description>
+                <ipxact:baseAddress>0</ipxact:baseAddress>
+                <ipxact:range>4</ipxact:range>
+                <ipxact:width>8</ipxact:width>
+                <ipxact:register>
+                    <ipxact:name>EventMaskReg</ipxact:name>
+                    <ipxact:displayName>Event Mask Register</ipxact:displayName>
+                    <ipxact:addressOffset>0x00</ipxact:addressOffset>
+                    <ipxact:size>32</ipxact:size>
+                    <ipxact:volatile>true</ipxact:volatile>
+                    <ipxact:access>read-write</ipxact:access>
+                    <ipxact:field>
+                        <ipxact:name>Mask</ipxact:name>
+                        <ipxact:bitOffset>0</ipxact:bitOffset>
+                        <ipxact:bitWidth>4</ipxact:bitWidth>
+                        <ipxact:volatile>false</ipxact:volatile>
+                        <ipxact:access>read-write</ipxact:access>
+                        <ipxact:enumeratedValues>
+                            <ipxact:enumeratedValue>
+<ipxact:name>EventEnabled</ipxact:name>
+<ipxact:description>Event is catched and forwarded.</ipxact:description>
+<ipxact:value>0x1</ipxact:value>
+                            </ipxact:enumeratedValue>
+                            <ipxact:enumeratedValue>
+<ipxact:name>EventDisabled</ipxact:name>
+<ipxact:description>Event is ignored.</ipxact:description>
+<ipxact:value>0x0</ipxact:value>
+                            </ipxact:enumeratedValue>
+                        </ipxact:enumeratedValues>
+                    </ipxact:field>
+                </ipxact:register>
+            </ipxact:addressBlock>
+            <ipxact:addressBlock>
+                <ipxact:name>EventCatchReg</ipxact:name>
+                <ipxact:displayName>Event Catch Register</ipxact:displayName>
+                <ipxact:description></ipxact:description>
+                <ipxact:baseAddress>4</ipxact:baseAddress>
+                <ipxact:range>4</ipxact:range>
+                <ipxact:width>8</ipxact:width>
+                <ipxact:register>
+                    <ipxact:name>EventCatchReg</ipxact:name>
+                    <ipxact:displayName>Event Catch Register</ipxact:displayName>
+                    <ipxact:addressOffset>0x04</ipxact:addressOffset>
+                    <ipxact:size>32</ipxact:size>
+                    <ipxact:volatile>true</ipxact:volatile>
+                    <ipxact:access>read-write</ipxact:access>
+                    <ipxact:field>
+                        <ipxact:name>Catch</ipxact:name>
+                        <ipxact:bitOffset>0</ipxact:bitOffset>
+                        <ipxact:resets>
+                            <ipxact:reset resetTypeRef="Async">
+<ipxact:value>0x00000000</ipxact:value>
+<ipxact:mask>0x0000000f</ipxact:mask>
+                            </ipxact:reset>
+                        </ipxact:resets>
+                        <ipxact:bitWidth>4</ipxact:bitWidth>
+                        <ipxact:volatile>true</ipxact:volatile>
+                        <ipxact:access>read-write</ipxact:access>
+                        <ipxact:enumeratedValues>
+                            <ipxact:enumeratedValue>
+<ipxact:name>Catched</ipxact:name>
+<ipxact:description>An event has been catched and is waiting to be processed.</ipxact:description>
+<ipxact:value>0x1</ipxact:value>
+                            </ipxact:enumeratedValue>
+                            <ipxact:enumeratedValue>
+<ipxact:name>NotCatched</ipxact:name>
+<ipxact:description>No event has been catched.</ipxact:description>
+<ipxact:value>0x0</ipxact:value>
+                            </ipxact:enumeratedValue>
+                            <ipxact:enumeratedValue>
+<ipxact:name>Catch_Confirmed</ipxact:name>
+<ipxact:displayName>Notifies HW that a catched event has been processed by SW.</ipxact:displayName>
+<ipxact:description>
+						SW writes Confirmed to confirm to HW that a catched event has been processed.
+						The value isn't stored, thus there is no need to reset it to '0' again.	
+						Solely the write action is sufficient.	
+						</ipxact:description>
+<ipxact:value>0x1</ipxact:value>
+                            </ipxact:enumeratedValue>
+                            <ipxact:enumeratedValue>
+<ipxact:name>Catch_InEffective</ipxact:name>
+<ipxact:displayName>Writing this value has no effect.</ipxact:displayName>
+<ipxact:value>0x0</ipxact:value>
+                            </ipxact:enumeratedValue>
+                        </ipxact:enumeratedValues>
+                    </ipxact:field>
+                </ipxact:register>
+            </ipxact:addressBlock>
+            <ipxact:addressBlock>
+                <ipxact:name>EventOverrunReg</ipxact:name>
+                <ipxact:displayName>Event Overrun Register</ipxact:displayName>
+                <ipxact:description></ipxact:description>
+                <ipxact:baseAddress>8</ipxact:baseAddress>
+                <ipxact:range>4</ipxact:range>
+                <ipxact:width>8</ipxact:width>
+                <ipxact:register>
+                    <ipxact:name>EventOverrunReg</ipxact:name>
+                    <ipxact:displayName>Event Overrun Register</ipxact:displayName>
+                    <ipxact:addressOffset>0x08</ipxact:addressOffset>
+                    <ipxact:size>32</ipxact:size>
+                    <ipxact:volatile>true</ipxact:volatile>
+                    <ipxact:access>read-write</ipxact:access>
+                    <ipxact:field>
+                        <ipxact:name>Overrun</ipxact:name>
+                        <ipxact:bitOffset>0</ipxact:bitOffset>
+                        <ipxact:resets>
+                            <ipxact:reset resetTypeRef="Async">
+<ipxact:value>0x00000000</ipxact:value>
+<ipxact:mask>0x0000000f</ipxact:mask>
+                            </ipxact:reset>
+                        </ipxact:resets>
+                        <ipxact:bitWidth>4</ipxact:bitWidth>
+                        <ipxact:volatile>true</ipxact:volatile>
+                        <ipxact:access>read-write</ipxact:access>
+                        <ipxact:enumeratedValues>
+                            <ipxact:enumeratedValue>
+<ipxact:name>Happened</ipxact:name>
+<ipxact:description>
+						There has been a new event before a catched event had been processed 
+						thus an overrun has happened and at least one event has been lost.</ipxact:description>
+<ipxact:value>0x1</ipxact:value>
+                            </ipxact:enumeratedValue>
+                            <ipxact:enumeratedValue>
+<ipxact:name>NotHappened</ipxact:name>
+<ipxact:description>No event has been lost.</ipxact:description>
+<ipxact:value>0x0</ipxact:value>
+                            </ipxact:enumeratedValue>
+                            <ipxact:enumeratedValue>
+<ipxact:name>Overrun_Confirmed</ipxact:name>
+<ipxact:displayName>Notifies HW that a event overrun has been processed by SW.</ipxact:displayName>
+<ipxact:description>
+						SW writes Confirmed to confirm to HW that a event overrun has been processed.
+						The value isn't stored, thus there is no need to reset it to '0' again.	
+						Solely the write action is sufficient.	
+						</ipxact:description>
+<ipxact:value>0x1</ipxact:value>
+                            </ipxact:enumeratedValue>
+                            <ipxact:enumeratedValue>
+<ipxact:name>Overrun_InEffective</ipxact:name>
+<ipxact:displayName>Writing this value has no effect.</ipxact:displayName>
+<ipxact:value>0x0</ipxact:value>
+                            </ipxact:enumeratedValue>
+                        </ipxact:enumeratedValues>
+                    </ipxact:field>
+                </ipxact:register>
+            </ipxact:addressBlock>
+        </ipxact:memoryMap>
+    </ipxact:memoryMaps>
+    <ipxact:resetTypes>
+        <ipxact:resetType>
+            <ipxact:name>Async</ipxact:name>
+            <ipxact:displayName>Event Catcher Interface</ipxact:displayName>
+            <ipxact:description>
+			Interface containing a basic Event Catcher block.
+		</ipxact:description>
+        </ipxact:resetType>
+    </ipxact:resetTypes>
+</ipxact:component>

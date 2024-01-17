@@ -1,0 +1,364 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>Eccelerators Library IP specification</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="#d5e1" title="Eccelerators Library IP specification"><link rel="next" href="#Eccelerators-Library-IP-EventCatcherIfc-composite" title="Chapter&nbsp;1.&nbsp;EventCatcherIfc"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="book"><div class="titlepage"><div><div><h1 class="title"><a name="d5e1"></a>Eccelerators Library IP specification</h1></div></div><hr></div>
+
+<div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="Eccelerators-Library-IP-EventCatcherIfc-composite"></a>Chapter&nbsp;1.&nbsp;EventCatcherIfc</h1></div></div></div>
+
+<div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="Eccelerators.Library.IP.EventCatcherIfc-composite"></a>Event Catcher Interface (EventCatcherIfc)</h2></div></div></div><p>Interface containing a basic Event Catcher block.</p><div class="table"><a name="d5e8"></a><p class="title"><b>Table&nbsp;1.1.&nbsp;Blocks of Event Catcher Interface</b></p><div class="table-contents"><table summary="Blocks of Event Catcher Interface" border="1" width="100%"><colgroup><col width="59" class="col1"><col width="52" class="col2"><col width="588" class="col3"></colgroup><tbody><tr><td colspan="3">
+            <p>Blocks of Event Catcher Interface</p>
+          </td></tr><tr><td>
+            <p>Block Address</p>
+          </td><td>
+            <p>ID</p>
+          </td><td>
+            <p>Block Name</p>
+          </td></tr><tr><td>
+            <p>
+              <code class="code">0x00</code>
+            </p>
+          </td><td><a name="a476c6cfa261"></a>
+            <p>EventCatcherBlk</p>
+          </td><td>
+            <p>
+              <a class="link" href="#a58e528b2cd3">Event Catcher Block</a>
+            </p>
+          </td></tr></tbody></table></div></div><br class="table-break"><p></p><div class="table"><a name="d5e35"></a><p class="title"><b>Table&nbsp;1.2.&nbsp;Resets of Event Catcher Interface</b></p><div class="table-contents"><table summary="Resets of Event Catcher Interface" border="1" width="100%"><colgroup><col width="59" class="col1"><col width="640" class="col2"></colgroup><tbody><tr><td colspan="2">
+            <p>Resets of Registers of Event Catcher Interface</p>
+          </td></tr><tr><td>
+            <p>ID</p>
+          </td><td>
+            <p>Reset Name</p>
+          </td></tr><tr><td>
+            <p>Async</p>
+          </td><td><a name="afef98fdeacb"></a>
+            <p>BusReset: Asynchronous Bus Reset</p>
+          </td></tr></tbody></table></div></div><br class="table-break"><p></p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="event-catcher-block-eventcatcherblk"></a>Event Catcher Block (EventCatcherBlk)</h3></div></div></div><p>This block defines a basic event catcher e.g. to convert <span class="strong"><strong>egde triggered</strong></span> interrupt sources
+to <span class="strong"><strong>level triggered</strong></span> interrupt sources.
+Its purpose is to be inherited by implementations of e.g., GPIO or Timer controllers
+utilizing this function to provide event information to SW for polling or as a prestage to
+transport events to an interrupt controller. Usually the events can be activated or deactivated at the HW block
+sourcing them e.g. timer is activated or not.
+The events must be deliverered as a pulse of exactly one clock duration.</p><p>Event Catcher details:</p><div class="figure"><a name="d5e61"></a><p class="title"><b>Figure&nbsp;1.1.&nbsp;Event Catcher details</b></p><div class="figure-contents"><div class="mediaobject"><img src="resources/EventCatcherUserLogic.png" width="270" alt="Event Catcher details"></div></div></div><br class="figure-break"><div class="table"><a name="d5e66"></a><p class="title"><b>Table&nbsp;1.3.&nbsp;Registers or Delegates of Event Catcher Block</b></p><div class="table-contents"><table summary="Registers or Delegates of Event Catcher Block" border="1" width="100%"><colgroup><col width="59" class="col1"><col width="52" class="col2"><col width="588" class="col3"></colgroup><tbody><tr><td colspan="3">
+              <p>Registers or Delegates of Event Catcher Block</p>
+            </td></tr><tr><td colspan="2">
+              <p>
+                <code class="code">0x00</code>
+              </p>
+              <p>
+                <code class="code">..</code>
+              </p>
+              <p>
+                <code class="code">0x0b</code>
+              </p>
+            </td><td><a name="a58e528b2cd3"></a>
+              <p>
+                <a class="link" href="#a476c6cfa261">Event Catcher Block</a>
+              </p>
+            </td></tr><tr><td>
+              <p>Address</p>
+            </td><td>
+              <p>ID</p>
+            </td><td>
+              <p>Name</p>
+            </td></tr><tr><td>
+              <p>
+                <code class="code">0x00</code>
+              </p>
+            </td><td><a name="a8056963705a"></a>
+              <p>EventMaskReg</p>
+            </td><td>
+              <p>
+                <a class="link" href="#a83801b05b4a">Event Mask Register</a>
+              </p>
+            </td></tr><tr><td>
+              <p>
+                <code class="code">0x04</code>
+              </p>
+            </td><td><a name="a9aa51f4ba96"></a>
+              <p>EventCatchReg</p>
+            </td><td>
+              <p>
+                <a class="link" href="#abc462069bec">Event Catch Register</a>
+              </p>
+            </td></tr><tr><td>
+              <p>
+                <code class="code">0x08</code>
+              </p>
+            </td><td><a name="ad7c150bf996"></a>
+              <p>EventOverrunReg</p>
+            </td><td>
+              <p>
+                <a class="link" href="#a4c9be5b0eaa">Event Overrun Register</a>
+              </p>
+            </td></tr></tbody></table></div></div><br class="table-break"><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="event-mask-register-eventmaskreg"></a>Event Mask Register (EventMaskReg)</h4></div></div></div><div class="table"><a name="d5e123"></a><p class="title"><b>Table&nbsp;1.4.&nbsp;Bits of Event Mask Register</b></p><div class="table-contents"><table summary="Bits of Event Mask Register" border="1" width="100%"><colgroup><col width="21" class="col1"><col width="59" class="col2"><col width="28" class="col3"><col width="591" class="col4"></colgroup><tbody><tr><td colspan="4">
+                <p>Bits of Event Mask Register</p>
+              </td></tr><tr><td colspan="3">
+                <p>
+                  <code class="code">0x00</code>
+                </p>
+              </td><td><a name="a83801b05b4a"></a>
+                <p>
+                  <a class="link" href="#a8056963705a">Event Mask Register (EventMaskReg)</a>
+                </p>
+              </td></tr><tr><td>
+                <p>Bits</p>
+              </td><td>
+                <p>ID</p>
+              </td><td>
+                <p>Type</p>
+              </td><td>
+                <p>Description</p>
+              </td></tr><tr><td>
+                <p>03</p>
+                <p>..</p>
+                <p>00</p>
+              </td><td>
+                <p>Mask</p>
+              </td><td><a name="af998e8d319c"></a>
+                <p>RW</p>
+              </td><td>
+                <div class="table"><a name="d5e160"></a><p class="title"><b>Table&nbsp;1.5.&nbsp;Values of Mask</b></p><div class="table-contents"><table summary="Values of Mask" border="1" width="100%"><colgroup><col width="59" class="col1"><col width="45" class="col2"><col width="28" class="col3"><col width="437" class="col4"></colgroup><tbody><tr><td>
+                          <p>Value</p>
+                        </td><td>
+                          <p>ID</p>
+                        </td><td>
+                          <p>Type</p>
+                        </td><td>
+                          <p>Description</p>
+                        </td></tr><tr><td>
+                          <p>
+                            <code class="code">0x1</code>
+                          </p>
+                        </td><td><a name="a0fb41fba44d"></a>
+                          <p>EventEnabled</p>
+                        </td><td>
+                          <p>RW</p>
+                        </td><td>
+                          <p>Event is catched and forwarded.</p>
+                        </td></tr><tr><td>
+                          <p>
+                            <code class="code">0x0</code>
+                          </p>
+                        </td><td><a name="a4a3d605f5fc"></a>
+                          <p>EventDisabled</p>
+                        </td><td>
+                          <p>RW</p>
+                        </td><td>
+                          <p>Event is ignored.</p>
+                        </td></tr></tbody></table></div></div><br class="table-break">
+                <p></p>
+                <div class="table"><a name="d5e198"></a><p class="title"><b>Table&nbsp;1.6.&nbsp;Resets of Mask</b></p><div class="table-contents"><table summary="Resets of Mask" border="1" width="100%"><colgroup><col width="59" class="col1"><col width="59" class="col2"><col width="28" class="col3"><col width="423" class="col4"></colgroup><tbody><tr><td>
+                          <p>
+                            <code class="code">0x0</code>
+                          </p>
+                        </td><td><a name="a64baf5daf0d"></a>
+                          <p>BusReset</p>
+                        </td><td>
+                          <p>RW</p>
+                        </td><td>
+                          <p>Default Bus Reset</p>
+                        </td></tr></tbody></table></div></div><br class="table-break">
+              </td></tr></tbody></table></div></div><br class="table-break"></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="event-catch-register-eventcatchreg"></a>Event Catch Register (EventCatchReg)</h4></div></div></div><div class="table"><a name="d5e218"></a><p class="title"><b>Table&nbsp;1.7.&nbsp;Bits of Event Catch Register</b></p><div class="table-contents"><table summary="Bits of Event Catch Register" border="1" width="100%"><colgroup><col width="21" class="col1"><col width="59" class="col2"><col width="28" class="col3"><col width="591" class="col4"></colgroup><tbody><tr><td colspan="4">
+                <p>Bits of Event Catch Register</p>
+              </td></tr><tr><td colspan="3">
+                <p>
+                  <code class="code">0x04</code>
+                </p>
+              </td><td><a name="abc462069bec"></a>
+                <p>
+                  <a class="link" href="#a9aa51f4ba96">Event Catch Register (EventCatchReg)</a>
+                </p>
+              </td></tr><tr><td>
+                <p>Bits</p>
+              </td><td>
+                <p>ID</p>
+              </td><td>
+                <p>Type</p>
+              </td><td>
+                <p>Description</p>
+              </td></tr><tr><td>
+                <p>03</p>
+                <p>..</p>
+                <p>00</p>
+              </td><td>
+                <p>Catch</p>
+              </td><td><a name="a8a92e66c749"></a>
+                <p>R/W</p>
+              </td><td>
+                <div class="table"><a name="d5e255"></a><p class="title"><b>Table&nbsp;1.8.&nbsp;Values of Catch</b></p><div class="table-contents"><table summary="Values of Catch" border="1" width="100%"><colgroup><col width="59" class="col1"><col width="45" class="col2"><col width="28" class="col3"><col width="437" class="col4"></colgroup><tbody><tr><td>
+                          <p>Value</p>
+                        </td><td>
+                          <p>ID</p>
+                        </td><td>
+                          <p>Type</p>
+                        </td><td>
+                          <p>Description</p>
+                        </td></tr><tr><td>
+                          <p>
+                            <code class="code">0x1</code>
+                          </p>
+                        </td><td><a name="acc179856ce8"></a>
+                          <p>Catched</p>
+                        </td><td>
+                          <p>R</p>
+                        </td><td>
+                          <p>An event has been catched and is waiting to be processed.</p>
+                        </td></tr><tr><td>
+                          <p>
+                            <code class="code">0x0</code>
+                          </p>
+                        </td><td><a name="a452cc0242d5"></a>
+                          <p>NotCatched</p>
+                        </td><td>
+                          <p>R</p>
+                        </td><td>
+                          <p>No event has been catched.</p>
+                        </td></tr><tr><td>
+                          <p>
+                            <code class="code">0x1</code>
+                          </p>
+                        </td><td><a name="a4ef59a94d7a"></a>
+                          <p>Confirmed</p>
+                        </td><td>
+                          <p>W</p>
+                        </td><td>
+                          <p>Notifies HW that a catched event has been processed by SW.</p>
+                          <p>SW writes Confirmed to confirm to HW that a catched event has been processed.
+The value isn&#8217;t stored, thus there is no need to reset it to &#8216;0&#8217; again.
+Solely the write action is sufficient.</p>
+                        </td></tr><tr><td>
+                          <p>
+                            <code class="code">0x0</code>
+                          </p>
+                        </td><td><a name="a5dc86e3b76c"></a>
+                          <p>InEffective</p>
+                        </td><td>
+                          <p>W</p>
+                        </td><td>
+                          <p>Writing this value has no effect.</p>
+                        </td></tr></tbody></table></div></div><br class="table-break">
+                <p></p>
+                <div class="table"><a name="d5e314"></a><p class="title"><b>Table&nbsp;1.9.&nbsp;Resets of Catch</b></p><div class="table-contents"><table summary="Resets of Catch" border="1" width="100%"><colgroup><col width="59" class="col1"><col width="59" class="col2"><col width="28" class="col3"><col width="423" class="col4"></colgroup><tbody><tr><td>
+                          <p>Init Value</p>
+                        </td><td>
+                          <p>ID</p>
+                        </td><td>
+                          <p>Impact</p>
+                        </td><td>
+                          <p>Description</p>
+                        </td></tr><tr><td>
+                          <p>
+                            <code class="code">0b0000</code>
+                          </p>
+                        </td><td><a name="a96aefda956a"></a>
+                          <p>Async</p>
+                        </td><td>
+                          <p>R</p>
+                        </td><td>
+                          <p>BusReset: Asynchronous Bus Reset</p>
+                          <p>The bit Catch is set to NotCatched after reset in the usually attached EventCatcher HW block.</p>
+                        </td></tr></tbody></table></div></div><br class="table-break">
+              </td></tr></tbody></table></div></div><br class="table-break"></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="event-overrun-register-eventoverrunreg"></a>Event Overrun Register (EventOverrunReg)</h4></div></div></div><div class="table"><a name="d5e344"></a><p class="title"><b>Table&nbsp;1.10.&nbsp;Bits of Event Overrun Register</b></p><div class="table-contents"><table summary="Bits of Event Overrun Register" border="1" width="100%"><colgroup><col width="21" class="col1"><col width="59" class="col2"><col width="28" class="col3"><col width="591" class="col4"></colgroup><tbody><tr><td colspan="4">
+                <p>Bits of Event Overrun Register</p>
+              </td></tr><tr><td colspan="3">
+                <p>
+                  <code class="code">0x08</code>
+                </p>
+              </td><td><a name="a4c9be5b0eaa"></a>
+                <p>
+                  <a class="link" href="#ad7c150bf996">Event Overrun Register (EventOverrunReg)</a>
+                </p>
+              </td></tr><tr><td>
+                <p>Bits</p>
+              </td><td>
+                <p>ID</p>
+              </td><td>
+                <p>Type</p>
+              </td><td>
+                <p>Description</p>
+              </td></tr><tr><td>
+                <p>03</p>
+                <p>..</p>
+                <p>00</p>
+              </td><td>
+                <p>Overrun</p>
+              </td><td><a name="afcbfd638728"></a>
+                <p>R/W</p>
+              </td><td>
+                <div class="table"><a name="d5e381"></a><p class="title"><b>Table&nbsp;1.11.&nbsp;Values of Overrun</b></p><div class="table-contents"><table summary="Values of Overrun" border="1" width="100%"><colgroup><col width="59" class="col1"><col width="45" class="col2"><col width="28" class="col3"><col width="437" class="col4"></colgroup><tbody><tr><td>
+                          <p>Value</p>
+                        </td><td>
+                          <p>ID</p>
+                        </td><td>
+                          <p>Type</p>
+                        </td><td>
+                          <p>Description</p>
+                        </td></tr><tr><td>
+                          <p>
+                            <code class="code">0x1</code>
+                          </p>
+                        </td><td><a name="a49bd5bb86e0"></a>
+                          <p>Happened</p>
+                        </td><td>
+                          <p>R</p>
+                        </td><td>
+                          <p>There has been a new event before a catched event had been processed
+thus an overrun has happened and at least one event has been lost.</p>
+                        </td></tr><tr><td>
+                          <p>
+                            <code class="code">0x0</code>
+                          </p>
+                        </td><td><a name="adabf61a0d3a"></a>
+                          <p>NotHappened</p>
+                        </td><td>
+                          <p>R</p>
+                        </td><td>
+                          <p>No event has been lost.</p>
+                        </td></tr><tr><td>
+                          <p>
+                            <code class="code">0x1</code>
+                          </p>
+                        </td><td><a name="aaa579124e18"></a>
+                          <p>Confirmed</p>
+                        </td><td>
+                          <p>W</p>
+                        </td><td>
+                          <p>Notifies HW that a event overrun has been processed by SW.</p>
+                          <p>SW writes Confirmed to confirm to HW that a event overrun has been processed.
+The value isn&#8217;t stored, thus there is no need to reset it to &#8216;0&#8217; again.
+Solely the write action is sufficient.</p>
+                        </td></tr><tr><td>
+                          <p>
+                            <code class="code">0x0</code>
+                          </p>
+                        </td><td><a name="a909d47ed9f4"></a>
+                          <p>InEffective</p>
+                        </td><td>
+                          <p>W</p>
+                        </td><td>
+                          <p>Writing this value has no effect.</p>
+                        </td></tr></tbody></table></div></div><br class="table-break">
+                <p></p>
+                <div class="table"><a name="d5e440"></a><p class="title"><b>Table&nbsp;1.12.&nbsp;Resets of Overrun</b></p><div class="table-contents"><table summary="Resets of Overrun" border="1" width="100%"><colgroup><col width="59" class="col1"><col width="59" class="col2"><col width="28" class="col3"><col width="423" class="col4"></colgroup><tbody><tr><td>
+                          <p>Init Value</p>
+                        </td><td>
+                          <p>ID</p>
+                        </td><td>
+                          <p>Impact</p>
+                        </td><td>
+                          <p>Description</p>
+                        </td></tr><tr><td>
+                          <p>
+                            <code class="code">0b0000</code>
+                          </p>
+                        </td><td><a name="ad7c26dc33bd"></a>
+                          <p>Async</p>
+                        </td><td>
+                          <p>R</p>
+                        </td><td>
+                          <p>BusReset: Asynchronous Bus Reset</p>
+                          <p>The bit Overrun is set to NotHappened after reset in the usually attached EventCatcher HW block.</p>
+                        </td></tr></tbody></table></div></div><br class="table-break">
+              </td></tr></tbody></table></div></div><br class="table-break"></div></div></div>
+</div>
+</div></body></html>

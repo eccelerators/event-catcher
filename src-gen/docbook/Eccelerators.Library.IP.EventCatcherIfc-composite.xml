@@ -1,0 +1,722 @@
+<?xml version='1.0' encoding='utf-8' standalone='yes'?>
+<section xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mathml="http://www.w3.org/1998/Math/MathML" xmlns="http://docbook.org/ns/docbook" xml:id="Eccelerators.Library.IP.EventCatcherIfc-composite" version="5.0">
+  <title>Event Catcher Interface (EventCatcherIfc)</title>
+  <para>Interface containing a basic Event Catcher block.</para>
+  <table>
+    <title>Blocks of Event Catcher Interface</title>
+    <tgroup cols="3">
+      <colspec colnum="1" colwidth="59" colname="col1"/>
+      <colspec colnum="2" colwidth="52" colname="col2"/>
+      <colspec colnum="3" colwidth="588" colname="col3"/>
+      <tbody>
+        <row>
+          <entry namest="col1" nameend="col3">
+            <para>Blocks of Event Catcher Interface</para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>Block Address</para>
+          </entry>
+          <entry>
+            <para>ID</para>
+          </entry>
+          <entry>
+            <para>Block Name</para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+              <code>0x00</code>
+            </para>
+          </entry>
+          <entry xml:id="a476c6cfa261">
+            <para>EventCatcherBlk</para>
+          </entry>
+          <entry>
+            <para>
+              <link linkend="a58e528b2cd3">Event Catcher Block</link>
+            </para>
+          </entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+  <para/>
+  <table>
+    <title>Resets of Event Catcher Interface</title>
+    <tgroup cols="2">
+      <colspec colnum="1" colwidth="59" colname="col1"/>
+      <colspec colnum="2" colwidth="640" colname="col2"/>
+      <tbody>
+        <row>
+          <entry namest="col1" nameend="col2">
+            <para>Resets of Registers of Event Catcher Interface</para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>ID</para>
+          </entry>
+          <entry>
+            <para>Reset Name</para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>Async</para>
+          </entry>
+          <entry xml:id="afef98fdeacb">
+            <para>BusReset: Asynchronous Bus Reset</para>
+          </entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+  <para/>
+  <section xml:id="event-catcher-block-eventcatcherblk">
+    <title>Event Catcher Block (EventCatcherBlk)</title>
+    <para>This block defines a basic event catcher e.g. to convert <emphasis role="strong">egde triggered</emphasis> interrupt sources
+to <emphasis role="strong">level triggered</emphasis> interrupt sources.
+Its purpose is to be inherited by implementations of e.g., GPIO or Timer controllers
+utilizing this function to provide event information to SW for polling or as a prestage to
+transport events to an interrupt controller. Usually the events can be activated or deactivated at the HW block
+sourcing them e.g. timer is activated or not.
+The events must be deliverered as a pulse of exactly one clock duration.</para>
+    <para>Event Catcher details:</para>
+    <figure>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="resources/EventCatcherUserLogic.png" scale="50"/>
+        </imageobject>
+      </mediaobject>
+      <title>Event Catcher details</title>
+    </figure>
+    <table>
+      <title>Registers or Delegates of Event Catcher Block</title>
+      <tgroup cols="3">
+        <colspec colnum="1" colwidth="59" colname="col1"/>
+        <colspec colnum="2" colwidth="52" colname="col2"/>
+        <colspec colnum="3" colwidth="588" colname="col3"/>
+        <tbody>
+          <row>
+            <entry namest="col1" nameend="col3">
+              <para>Registers or Delegates of Event Catcher Block</para>
+            </entry>
+          </row>
+          <row>
+            <entry namest="col1" nameend="col2">
+              <para>
+                <code>0x00</code>
+              </para>
+              <para>
+                <code>..</code>
+              </para>
+              <para>
+                <code>0x0b</code>
+              </para>
+            </entry>
+            <entry xml:id="a58e528b2cd3">
+              <para>
+                <link linkend="a476c6cfa261">Event Catcher Block</link>
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>Address</para>
+            </entry>
+            <entry>
+              <para>ID</para>
+            </entry>
+            <entry>
+              <para>Name</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+                <code>0x00</code>
+              </para>
+            </entry>
+            <entry xml:id="a8056963705a">
+              <para>EventMaskReg</para>
+            </entry>
+            <entry>
+              <para>
+                <link linkend="a83801b05b4a">Event Mask Register</link>
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+                <code>0x04</code>
+              </para>
+            </entry>
+            <entry xml:id="a9aa51f4ba96">
+              <para>EventCatchReg</para>
+            </entry>
+            <entry>
+              <para>
+                <link linkend="abc462069bec">Event Catch Register</link>
+              </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+                <code>0x08</code>
+              </para>
+            </entry>
+            <entry xml:id="ad7c150bf996">
+              <para>EventOverrunReg</para>
+            </entry>
+            <entry>
+              <para>
+                <link linkend="a4c9be5b0eaa">Event Overrun Register</link>
+              </para>
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <section xml:id="event-mask-register-eventmaskreg">
+      <title>Event Mask Register (EventMaskReg)</title>
+      <table>
+        <title>Bits of Event Mask Register</title>
+        <tgroup cols="4">
+          <colspec colnum="1" colwidth="21" colname="col1"/>
+          <colspec colnum="2" colwidth="59" colname="col2"/>
+          <colspec colnum="3" colwidth="28" colname="col3"/>
+          <colspec colnum="4" colwidth="591" colname="col4"/>
+          <tbody>
+            <row>
+              <entry namest="col1" nameend="col4">
+                <para>Bits of Event Mask Register</para>
+              </entry>
+            </row>
+            <row>
+              <entry namest="col1" nameend="col3">
+                <para>
+                  <code>0x00</code>
+                </para>
+              </entry>
+              <entry xml:id="a83801b05b4a">
+                <para>
+                  <link linkend="a8056963705a">Event Mask Register (EventMaskReg)</link>
+                </para>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <para>Bits</para>
+              </entry>
+              <entry>
+                <para>ID</para>
+              </entry>
+              <entry>
+                <para>Type</para>
+              </entry>
+              <entry>
+                <para>Description</para>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <para>03</para>
+                <para>..</para>
+                <para>00</para>
+              </entry>
+              <entry>
+                <para>Mask</para>
+              </entry>
+              <entry xml:id="af998e8d319c">
+                <para>RW</para>
+              </entry>
+              <entry>
+                <table>
+                  <title>Values of Mask</title>
+                  <tgroup cols="4">
+                    <colspec colnum="1" colwidth="59" colname="col1"/>
+                    <colspec colnum="2" colwidth="45" colname="col2"/>
+                    <colspec colnum="3" colwidth="28" colname="col3"/>
+                    <colspec colnum="4" colwidth="437" colname="col4"/>
+                    <tbody>
+                      <row>
+                        <entry>
+                          <para>Value</para>
+                        </entry>
+                        <entry>
+                          <para>ID</para>
+                        </entry>
+                        <entry>
+                          <para>Type</para>
+                        </entry>
+                        <entry>
+                          <para>Description</para>
+                        </entry>
+                      </row>
+                      <row>
+                        <entry>
+                          <para>
+                            <code>0x1</code>
+                          </para>
+                        </entry>
+                        <entry xml:id="a0fb41fba44d">
+                          <para>EventEnabled</para>
+                        </entry>
+                        <entry>
+                          <para>RW</para>
+                        </entry>
+                        <entry>
+                          <para>Event is catched and forwarded.</para>
+                        </entry>
+                      </row>
+                      <row>
+                        <entry>
+                          <para>
+                            <code>0x0</code>
+                          </para>
+                        </entry>
+                        <entry xml:id="a4a3d605f5fc">
+                          <para>EventDisabled</para>
+                        </entry>
+                        <entry>
+                          <para>RW</para>
+                        </entry>
+                        <entry>
+                          <para>Event is ignored.</para>
+                        </entry>
+                      </row>
+                    </tbody>
+                  </tgroup>
+                </table>
+                <para/>
+                <table>
+                  <title>Resets of Mask</title>
+                  <tgroup cols="4">
+                    <colspec colnum="1" colwidth="59" colname="col1"/>
+                    <colspec colnum="2" colwidth="59" colname="col2"/>
+                    <colspec colnum="3" colwidth="28" colname="col3"/>
+                    <colspec colnum="4" colwidth="423" colname="col4"/>
+                    <tbody>
+                      <row>
+                        <entry>
+                          <para>
+                            <code>0x0</code>
+                          </para>
+                        </entry>
+                        <entry xml:id="a64baf5daf0d">
+                          <para>BusReset</para>
+                        </entry>
+                        <entry>
+                          <para>RW</para>
+                        </entry>
+                        <entry>
+                          <para>Default Bus Reset</para>
+                        </entry>
+                      </row>
+                    </tbody>
+                  </tgroup>
+                </table>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+    <section xml:id="event-catch-register-eventcatchreg">
+      <title>Event Catch Register (EventCatchReg)</title>
+      <table>
+        <title>Bits of Event Catch Register</title>
+        <tgroup cols="4">
+          <colspec colnum="1" colwidth="21" colname="col1"/>
+          <colspec colnum="2" colwidth="59" colname="col2"/>
+          <colspec colnum="3" colwidth="28" colname="col3"/>
+          <colspec colnum="4" colwidth="591" colname="col4"/>
+          <tbody>
+            <row>
+              <entry namest="col1" nameend="col4">
+                <para>Bits of Event Catch Register</para>
+              </entry>
+            </row>
+            <row>
+              <entry namest="col1" nameend="col3">
+                <para>
+                  <code>0x04</code>
+                </para>
+              </entry>
+              <entry xml:id="abc462069bec">
+                <para>
+                  <link linkend="a9aa51f4ba96">Event Catch Register (EventCatchReg)</link>
+                </para>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <para>Bits</para>
+              </entry>
+              <entry>
+                <para>ID</para>
+              </entry>
+              <entry>
+                <para>Type</para>
+              </entry>
+              <entry>
+                <para>Description</para>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <para>03</para>
+                <para>..</para>
+                <para>00</para>
+              </entry>
+              <entry>
+                <para>Catch</para>
+              </entry>
+              <entry xml:id="a8a92e66c749">
+                <para>R/W</para>
+              </entry>
+              <entry>
+                <table>
+                  <title>Values of Catch</title>
+                  <tgroup cols="4">
+                    <colspec colnum="1" colwidth="59" colname="col1"/>
+                    <colspec colnum="2" colwidth="45" colname="col2"/>
+                    <colspec colnum="3" colwidth="28" colname="col3"/>
+                    <colspec colnum="4" colwidth="437" colname="col4"/>
+                    <tbody>
+                      <row>
+                        <entry>
+                          <para>Value</para>
+                        </entry>
+                        <entry>
+                          <para>ID</para>
+                        </entry>
+                        <entry>
+                          <para>Type</para>
+                        </entry>
+                        <entry>
+                          <para>Description</para>
+                        </entry>
+                      </row>
+                      <row>
+                        <entry>
+                          <para>
+                            <code>0x1</code>
+                          </para>
+                        </entry>
+                        <entry xml:id="acc179856ce8">
+                          <para>Catched</para>
+                        </entry>
+                        <entry>
+                          <para>R</para>
+                        </entry>
+                        <entry>
+                          <para>An event has been catched and is waiting to be processed.</para>
+                        </entry>
+                      </row>
+                      <row>
+                        <entry>
+                          <para>
+                            <code>0x0</code>
+                          </para>
+                        </entry>
+                        <entry xml:id="a452cc0242d5">
+                          <para>NotCatched</para>
+                        </entry>
+                        <entry>
+                          <para>R</para>
+                        </entry>
+                        <entry>
+                          <para>No event has been catched.</para>
+                        </entry>
+                      </row>
+                      <row>
+                        <entry>
+                          <para>
+                            <code>0x1</code>
+                          </para>
+                        </entry>
+                        <entry xml:id="a4ef59a94d7a">
+                          <para>Confirmed</para>
+                        </entry>
+                        <entry>
+                          <para>W</para>
+                        </entry>
+                        <entry>
+                          <para>Notifies HW that a catched event has been processed by SW.</para>
+                          <para>SW writes Confirmed to confirm to HW that a catched event has been processed.
+The value isn’t stored, thus there is no need to reset it to ‘0’ again.
+Solely the write action is sufficient.</para>
+                        </entry>
+                      </row>
+                      <row>
+                        <entry>
+                          <para>
+                            <code>0x0</code>
+                          </para>
+                        </entry>
+                        <entry xml:id="a5dc86e3b76c">
+                          <para>InEffective</para>
+                        </entry>
+                        <entry>
+                          <para>W</para>
+                        </entry>
+                        <entry>
+                          <para>Writing this value has no effect.</para>
+                        </entry>
+                      </row>
+                    </tbody>
+                  </tgroup>
+                </table>
+                <para/>
+                <table>
+                  <title>Resets of Catch</title>
+                  <tgroup cols="4">
+                    <colspec colnum="1" colwidth="59" colname="col1"/>
+                    <colspec colnum="2" colwidth="59" colname="col2"/>
+                    <colspec colnum="3" colwidth="28" colname="col3"/>
+                    <colspec colnum="4" colwidth="423" colname="col4"/>
+                    <tbody>
+                      <row>
+                        <entry>
+                          <para>Init Value</para>
+                        </entry>
+                        <entry>
+                          <para>ID</para>
+                        </entry>
+                        <entry>
+                          <para>Impact</para>
+                        </entry>
+                        <entry>
+                          <para>Description</para>
+                        </entry>
+                      </row>
+                      <row>
+                        <entry>
+                          <para>
+                            <code>0b0000</code>
+                          </para>
+                        </entry>
+                        <entry xml:id="a96aefda956a">
+                          <para>Async</para>
+                        </entry>
+                        <entry>
+                          <para>R</para>
+                        </entry>
+                        <entry>
+                          <para>BusReset: Asynchronous Bus Reset</para>
+                          <para>The bit Catch is set to NotCatched after reset in the usually attached EventCatcher HW block.</para>
+                        </entry>
+                      </row>
+                    </tbody>
+                  </tgroup>
+                </table>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+    <section xml:id="event-overrun-register-eventoverrunreg">
+      <title>Event Overrun Register (EventOverrunReg)</title>
+      <table>
+        <title>Bits of Event Overrun Register</title>
+        <tgroup cols="4">
+          <colspec colnum="1" colwidth="21" colname="col1"/>
+          <colspec colnum="2" colwidth="59" colname="col2"/>
+          <colspec colnum="3" colwidth="28" colname="col3"/>
+          <colspec colnum="4" colwidth="591" colname="col4"/>
+          <tbody>
+            <row>
+              <entry namest="col1" nameend="col4">
+                <para>Bits of Event Overrun Register</para>
+              </entry>
+            </row>
+            <row>
+              <entry namest="col1" nameend="col3">
+                <para>
+                  <code>0x08</code>
+                </para>
+              </entry>
+              <entry xml:id="a4c9be5b0eaa">
+                <para>
+                  <link linkend="ad7c150bf996">Event Overrun Register (EventOverrunReg)</link>
+                </para>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <para>Bits</para>
+              </entry>
+              <entry>
+                <para>ID</para>
+              </entry>
+              <entry>
+                <para>Type</para>
+              </entry>
+              <entry>
+                <para>Description</para>
+              </entry>
+            </row>
+            <row>
+              <entry>
+                <para>03</para>
+                <para>..</para>
+                <para>00</para>
+              </entry>
+              <entry>
+                <para>Overrun</para>
+              </entry>
+              <entry xml:id="afcbfd638728">
+                <para>R/W</para>
+              </entry>
+              <entry>
+                <table>
+                  <title>Values of Overrun</title>
+                  <tgroup cols="4">
+                    <colspec colnum="1" colwidth="59" colname="col1"/>
+                    <colspec colnum="2" colwidth="45" colname="col2"/>
+                    <colspec colnum="3" colwidth="28" colname="col3"/>
+                    <colspec colnum="4" colwidth="437" colname="col4"/>
+                    <tbody>
+                      <row>
+                        <entry>
+                          <para>Value</para>
+                        </entry>
+                        <entry>
+                          <para>ID</para>
+                        </entry>
+                        <entry>
+                          <para>Type</para>
+                        </entry>
+                        <entry>
+                          <para>Description</para>
+                        </entry>
+                      </row>
+                      <row>
+                        <entry>
+                          <para>
+                            <code>0x1</code>
+                          </para>
+                        </entry>
+                        <entry xml:id="a49bd5bb86e0">
+                          <para>Happened</para>
+                        </entry>
+                        <entry>
+                          <para>R</para>
+                        </entry>
+                        <entry>
+                          <para>There has been a new event before a catched event had been processed
+thus an overrun has happened and at least one event has been lost.</para>
+                        </entry>
+                      </row>
+                      <row>
+                        <entry>
+                          <para>
+                            <code>0x0</code>
+                          </para>
+                        </entry>
+                        <entry xml:id="adabf61a0d3a">
+                          <para>NotHappened</para>
+                        </entry>
+                        <entry>
+                          <para>R</para>
+                        </entry>
+                        <entry>
+                          <para>No event has been lost.</para>
+                        </entry>
+                      </row>
+                      <row>
+                        <entry>
+                          <para>
+                            <code>0x1</code>
+                          </para>
+                        </entry>
+                        <entry xml:id="aaa579124e18">
+                          <para>Confirmed</para>
+                        </entry>
+                        <entry>
+                          <para>W</para>
+                        </entry>
+                        <entry>
+                          <para>Notifies HW that a event overrun has been processed by SW.</para>
+                          <para>SW writes Confirmed to confirm to HW that a event overrun has been processed.
+The value isn’t stored, thus there is no need to reset it to ‘0’ again.
+Solely the write action is sufficient.</para>
+                        </entry>
+                      </row>
+                      <row>
+                        <entry>
+                          <para>
+                            <code>0x0</code>
+                          </para>
+                        </entry>
+                        <entry xml:id="a909d47ed9f4">
+                          <para>InEffective</para>
+                        </entry>
+                        <entry>
+                          <para>W</para>
+                        </entry>
+                        <entry>
+                          <para>Writing this value has no effect.</para>
+                        </entry>
+                      </row>
+                    </tbody>
+                  </tgroup>
+                </table>
+                <para/>
+                <table>
+                  <title>Resets of Overrun</title>
+                  <tgroup cols="4">
+                    <colspec colnum="1" colwidth="59" colname="col1"/>
+                    <colspec colnum="2" colwidth="59" colname="col2"/>
+                    <colspec colnum="3" colwidth="28" colname="col3"/>
+                    <colspec colnum="4" colwidth="423" colname="col4"/>
+                    <tbody>
+                      <row>
+                        <entry>
+                          <para>Init Value</para>
+                        </entry>
+                        <entry>
+                          <para>ID</para>
+                        </entry>
+                        <entry>
+                          <para>Impact</para>
+                        </entry>
+                        <entry>
+                          <para>Description</para>
+                        </entry>
+                      </row>
+                      <row>
+                        <entry>
+                          <para>
+                            <code>0b0000</code>
+                          </para>
+                        </entry>
+                        <entry xml:id="ad7c26dc33bd">
+                          <para>Async</para>
+                        </entry>
+                        <entry>
+                          <para>R</para>
+                        </entry>
+                        <entry>
+                          <para>BusReset: Asynchronous Bus Reset</para>
+                          <para>The bit Overrun is set to NotHappened after reset in the usually attached EventCatcher HW block.</para>
+                        </entry>
+                      </row>
+                    </tbody>
+                  </tgroup>
+                </table>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+  </section>
+</section>
