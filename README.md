@@ -10,5 +10,5 @@ The following picture shows the proposed HW realization as schematic attached to
 
 ![EventCatcherUserLogic](https://github.com/eccelerators/event-catcher/assets/124497409/791c7b7f-961e-4de3-bec9-97cc6792c2cd)
 
-The block can be customized to handle more events by modifying the HxS description and the attached VHDL realization.
+The block can be customized to handle more events by modifying the HxS description and the attached VHDL realization. 
 
